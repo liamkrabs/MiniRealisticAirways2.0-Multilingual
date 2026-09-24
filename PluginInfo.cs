@@ -4,7 +4,7 @@ public static class PluginInfo
 {
 	public const string PLUGIN_GUID = "MiniRealisticAirways";
 
-	public const string PLUGIN_NAME = "MiniRealisticAirways";
+	public const string PLUGIN_NAME = "MiniRealisticAirways 2.0 (Multilingual)";
 
 	// BepInEx 5 parses this value with System.Version. Keep it numeric and
 	// expose the descriptive build label separately for manifests and logs.

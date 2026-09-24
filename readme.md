@@ -1,6 +1,6 @@
-# Mini Realistic Airways
+# MiniRealisticAirways 2.0 (Multilingual)
 
-[中文](https://github.com/liamkrabs/MiniRealisticAirways?tab=readme-ov-file#%E8%BF%B7%E4%BD%A0%E7%9C%9F%E5%AE%9E%E7%A9%BA%E7%AE%A1)
+[中文](#迷你真实空管)
 
 This is a mini yet realistic air traffic control mod for Mini Airways.
 
@@ -8,6 +8,7 @@ This is a mini yet realistic air traffic control mod for Mini Airways.
 
 - **Multilingual support:** Adds built-in localization for English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Arabic, Dutch, French, German, Polish, Portuguese, Russian, Spanish, Turkish, and Ukrainian. The tutorial, QRH, settings toggles, aircraft/waypoint HUD, wind-direction text, fuel/aircraft-type text, and engine failure dialogue follow the game language and can be switched without restarting.
 - **Altitude-layer display sorting:** Adds a visual sorting controller that determines aircraft occlusion based on altitude and render order, fixing cases where text was obscured by runways or mountains.
+- **Gameplay adjustment:** Waypoints can now be renamed during placement, while the game is running, and while paused.
 - **Art replacements:** Replaces the wind indicator with a more attractive solid arrow; uses shared solid blocks for altitude/speed levels in the aircraft and waypoint HUD; and rearranges parts of the UI for a cleaner appearance.
 - **Other optimizations and refactoring:** Improves the code structure, rewrites and hardens parts of the functionality, splits large files into multiple state components and patches, improves TCAS decision-making, mitigates memory leaks, and more.
 
@@ -23,8 +24,6 @@ Use `Tab` to close text display on altitude, speed, type and fuel level below th
 <img src="img/detail.png" width=20% height=20%> 
 
 <img src="img/nodetail.png" width=20% height=20%>
-
-Disabling events does not affect the appearance of light and heavy aircraft.
 
 To disable wind, use `Enable Wind` toggle in `Options` menu or add `-disableWind` to launch options. To disable events, use `Enable Event` toggle in `Options` menu or add `-disableEvents` to launch options. To disable TCAS & GPWS, use `Enable TCAS&GPWS` toggle in `Options` menu or add `-disableTCAS` to launch options.
 
@@ -146,7 +145,7 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 - You now starts with 3 waiting area upgrades.
 - You now get upgrades twice as fast.
 - Aircraft flying out-of-bound now count as restricted area violations instead of an instant game-over.
-- Press `Space` while placing a waypoint, or hover over an existing waypoint and press `Space`, to rename it. In normal mode, renaming pauses the game; it also works when already paused. Press `Space` again or left-click to finish and resume the previous speed. In Hardcore mode, renaming works while traffic continues, without pausing or changing the game speed. During waypoint placement, the existing placement pause remains until placement is complete. With no waypoint under the pointer, `Space` keeps its normal behavior, including Hardcore's pause restriction. Names accept up to 5 characters, using only `A–Z` and `0–9`. Lowercase becomes uppercase; with a Chinese input method selected, letter/digit keys are read directly without composing Chinese characters. Full-width Latin letters/digits are normalized. Use `Backspace` to delete, `Enter` to confirm without changing the time state, or `Esc` to cancel without changing the time state.
+- Press `Space` while placing a waypoint or hovering over an existing waypoint to rename it.
 
 <img src="img/waypoint_name.png" width=100% height=100%>
 
@@ -160,6 +159,7 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 
 - **多语言支持：** 新增内置本地化：英语、简体中文、繁体中文、日语、韩语、阿拉伯语、荷兰语、法语、德语、波兰语、葡萄牙语、俄语、西班牙语、土耳其语和乌克兰语。教程、QRH、设置开关、飞机/航点 HUD、风向文字、燃油/机型文字和引擎故障对白会跟随游戏语言，并支持不重启切换。
 - **高度层显示排序：** 新增了视觉排序控制器，按高度和刷新顺序来决定飞机的遮挡关系，修复了文字被跑道或山区遮挡的问题。
+- **功能调整：** 在放置、运行和暂停状态下均可以重命名航点。
 - **美术替换：** 风向标改为更美观的实心箭头；飞机和航点 HUD 的高度/速度等级使用共用的实心方块表示；重新排布部分UI使之更美观。
 - **其他优化和重构：** 优化代码结构，对其中部分功能进行了重写和加固；将大文件拆分为多个状态组件和补丁；优化了TCAS的智能程度；缓解了内存泄漏的情况等。
 
@@ -175,8 +175,6 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 <img src="img/detail_cn.png" width=20% height=20%> 
 
 <img src="img/nodetail.png" width=20% height=20%>
-
-关闭特情不会影响轻型和重型飞机的专用外观。
 
 可通过选项菜单里的`启用风向`或在游戏启动项内用 `-disableWind` 关闭风向系统，通过选项菜单里的`启用特情`或在游戏启动项内用 `-disableEvents` 关闭特情系统，通过选项菜单里的`启用TCAS与GPWS`或在游戏启动项内用 `-disableTCAS` 关闭TCAS和GPWS。
 
@@ -286,6 +284,6 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 - 开场时自动获得3个等待区升级。
 - 升级现在每半天刷新一次。
 - 飞出屏幕相当于飞入禁飞区。
-- 放置航点时按 `Space`，或将鼠标指向已有航点后按 `Space`，即可重命名。普通模式下自动暂停，已暂停时也可进入；再次按 `Space` 或点击鼠标左键，完成命名并恢复暂停前的速度。硬核模式下也可重命名，但交通继续运行，不触发暂停或改变速度。放置航点时沿用原有暂停，完成放置后再恢复。鼠标没有指向航点时，`Space` 保持原有行为，硬核模式仍不能手动暂停。名字最多为 5 个字符，仅接受 `A–Z` 和 `0–9`；小写自动转大写，开着中文输入法时也直接读取字母／数字按键，不进入中文组词，全角英文字母和数字自动转为半角。可用 `Backspace` 删除；`Enter` 确认、`Esc` 取消修改，两者均不改变当前暂停／运行状态。
+- 放置航点时，或将鼠标指向已有航点后，按下`Space`，即可重命名航点。
 
 <img src="img/waypoint_name_cn.png" width=100% height=100%>
