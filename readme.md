@@ -24,6 +24,8 @@ Use `Tab` to close text display on altitude, speed, type and fuel level below th
 
 <img src="img/nodetail.png" width=20% height=20%>
 
+Disabling events does not affect the appearance of light and heavy aircraft.
+
 To disable wind, use `Enable Wind` toggle in `Options` menu or add `-disableWind` to launch options. To disable events, use `Enable Event` toggle in `Options` menu or add `-disableEvents` to launch options. To disable TCAS & GPWS, use `Enable TCAS&GPWS` toggle in `Options` menu or add `-disableTCAS` to launch options.
 
 <img src="img/settings.png" width=50% height=50%>
@@ -144,7 +146,7 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 - You now starts with 3 waiting area upgrades.
 - You now get upgrades twice as fast.
 - Aircraft flying out-of-bound now count as restricted area violations instead of an instant game-over.
-- You can name your waypoints by first press `Space` when placing it and starting typing. Only letters and numbers are allowed with a maximum length of 5 characters.
+- Press `Space` while placing a waypoint, or hover over an existing waypoint and press `Space`, to rename it. In normal mode, renaming pauses the game; it also works when already paused. Press `Space` again or left-click to finish and resume the previous speed. In Hardcore mode, renaming works while traffic continues, without pausing or changing the game speed. During waypoint placement, the existing placement pause remains until placement is complete. With no waypoint under the pointer, `Space` keeps its normal behavior, including Hardcore's pause restriction. Names accept up to 5 characters, using only `A–Z` and `0–9`. Lowercase becomes uppercase; with a Chinese input method selected, letter/digit keys are read directly without composing Chinese characters. Full-width Latin letters/digits are normalized. Use `Backspace` to delete, `Enter` to confirm without changing the time state, or `Esc` to cancel without changing the time state.
 
 <img src="img/waypoint_name.png" width=100% height=100%>
 
@@ -173,6 +175,8 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 <img src="img/detail_cn.png" width=20% height=20%> 
 
 <img src="img/nodetail.png" width=20% height=20%>
+
+关闭特情不会影响轻型和重型飞机的专用外观。
 
 可通过选项菜单里的`启用风向`或在游戏启动项内用 `-disableWind` 关闭风向系统，通过选项菜单里的`启用特情`或在游戏启动项内用 `-disableEvents` 关闭特情系统，通过选项菜单里的`启用TCAS与GPWS`或在游戏启动项内用 `-disableTCAS` 关闭TCAS和GPWS。
 
@@ -282,6 +286,6 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 - 开场时自动获得3个等待区升级。
 - 升级现在每半天刷新一次。
 - 飞出屏幕相当于飞入禁飞区。
-- 放置航点时先按 `Space` 就可以对航点命名。名字可以是5个字母+数字的任意组合。
+- 放置航点时按 `Space`，或将鼠标指向已有航点后按 `Space`，即可重命名。普通模式下自动暂停，已暂停时也可进入；再次按 `Space` 或点击鼠标左键，完成命名并恢复暂停前的速度。硬核模式下也可重命名，但交通继续运行，不触发暂停或改变速度。放置航点时沿用原有暂停，完成放置后再恢复。鼠标没有指向航点时，`Space` 保持原有行为，硬核模式仍不能手动暂停。名字最多为 5 个字符，仅接受 `A–Z` 和 `0–9`；小写自动转大写，开着中文输入法时也直接读取字母／数字按键，不进入中文组词，全角英文字母和数字自动转为半角。可用 `Backspace` 删除；`Enter` 确认、`Esc` 取消修改，两者均不改变当前暂停／运行状态。
 
 <img src="img/waypoint_name_cn.png" width=100% height=100%>

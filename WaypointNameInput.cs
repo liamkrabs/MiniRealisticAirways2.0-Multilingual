@@ -12,6 +12,9 @@ public class WaypointNameInput : MonoBehaviour
 
 	private const int MAX_LENGTH = 5;
 	private string originalText_;
+	private static bool resumeOnConfirm_;
+	private static bool imeOwned_;
+	private static IMECompositionMode previousImeMode_;
 
 	private static readonly System.Collections.Generic.List<WaypointNameInput> inputs_ = new System.Collections.Generic.List<WaypointNameInput>();
 	private static WaypointNameInput focused_;
@@ -42,12 +45,13 @@ public class WaypointNameInput : MonoBehaviour
 		if (hovered_ == this) hovered_ = null;
 		inputs_.Remove(this);
 		if (inputs_.Count == 0) mainCamera_ = null;
+		if (focused_ == null) RestoreIme();
 	}
 	private void OnDestroy() { OnDisable(); }
 	private void Update() { ProcessInput(); }
 	private void OnApplicationFocus(bool hasFocus)
 	{
-		if (!hasFocus && focused_ == this) EndSession();
+		if (!hasFocus && focused_ == this) { EndSession(); RestoreIme(); }
 	}
 
 	// All consumers resolve the same target and naming state before reading flight keys.
@@ -57,6 +61,7 @@ public class WaypointNameInput : MonoBehaviour
 		if (processedFrame_ == Time.frameCount) return;
 		processedFrame_ = Time.frameCount;
 		consumedFrame_ = sessionEndedFrame_ == Time.frameCount;
+		if (focused_ == null && !consumedFrame_) RestoreIme();
 		hovered_ = null;
 		float best = float.PositiveInfinity;
 		foreach (WaypointNameInput input in inputs_)
@@ -76,41 +81,70 @@ public class WaypointNameInput : MonoBehaviour
 		if (focused_ != null)
 		{
 			consumedFrame_ = true;
-			// Space 不在这里处理：它与原版暂停共用一个按键，统一由 ConsumePauseKey
-			// 在 LevelManager.OnPauseTimeBtnPressed 的前缀里仲裁，避免两种结局同帧打架。
-			if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Escape)
-				|| (Input.GetMouseButtonDown(0) && hovered_ != focused_) || Time.timeScale == 0f)
+			if (!CanEdit()) EndSession();
+			else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+			{
+				bool resume = resumeOnConfirm_;
+				EndSession();
+				// Placement owns its pause and blocks manual time control. Never release that lock.
+				if (resume) TimeManager.Instance.Resume(isManual: true);
+			}
+			else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Escape))
 			{
 				EndSession(cancel: Input.GetKeyDown(KeyCode.Escape));
 			}
 			else focused_.Type(); // Continue editing after the pointer leaves the waypoint.
 		}
+		else if (!consumedFrame_ && Input.GetKeyDown(KeyCode.Space) && CanEdit())
+		{
+			WaypointNameInput target = hovered_;
+			// A moving placement preview may not yet have followed this frame's pointer.
+			if (WaypointPropsManager.Instance != null && WaypointPropsManager.Instance.HasPlacingProps)
+			{
+				target = inputs_.Find(input => input != null && input.isActiveAndEnabled
+					&& input.waypoint_ != null && !input.waypoint_.Invisible
+					&& input.waypoint_ is BaseWaypointAutoHeading
+					&& input.waypoint_ == WaypointPropsManager.Instance.currentPlacingWaypoint);
+			}
+			if (target != null)
+			{
+				bool hardcore = MapManager.gameMode == GameMode.HardCore;
+				if (!hardcore && Time.timeScale > 0f) TimeManager.Instance.Pause(isManual: true);
+				// Hardcore permits naming while traffic keeps running. Never change its speed.
+				resumeOnConfirm_ = !hardcore && Time.timeScale == 0f;
+				if (!imeOwned_)
+				{
+					previousImeMode_ = Input.imeCompositionMode;
+					imeOwned_ = true;
+				}
+				Input.imeCompositionMode = IMECompositionMode.Off;
+				focused_ = target;
+				focused_.originalText_ = focused_.text ?? string.Empty;
+				focused_.active = true;
+				consumedFrame_ = true;
+			}
+		}
+	}
+
+	private static bool CanEdit()
+	{
+		if (TimeManager.Instance == null || LevelManager.Instance == null
+			|| LevelManager.Instance.ShowingPauseMenu || LevelManager.Instance.ShowingOptions
+			|| (GameOverManager.Instance != null && GameOverManager.Instance.GameOverFlag)
+			|| (UpgradeManager.Instance != null && UpgradeManager.Instance.HasShowingUpgradePanel)) return false;
+		return !TimeManager.Instance.IsManualTimeControlBlocked()
+			|| (WaypointPropsManager.Instance != null && WaypointPropsManager.Instance.HasPlacingProps);
 	}
 
 	/// <summary>
 	/// LevelManager.OnPauseTimeBtnPressed 的键盘 Space 仲裁入口。
-	/// 命名中：Space 结束会话并拦截暂停；悬停航点：Space 开启会话并拦截暂停；
-	/// 其余情况返回 false，原版暂停照常执行。暂停按钮的鼠标点击不含 Space，不受影响。
+	/// ProcessInput resolves Space once per frame, before any flight/time shortcut consumer.
+	/// Suppress the native toggle on entry/exit so it cannot undo the requested pause/resume.
 	/// </summary>
 	internal static bool ConsumePauseKey()
 	{
 		ProcessInput();
-		if (!Input.GetKeyDown(KeyCode.Space)) return false;
-		if (sessionEndedFrame_ == Time.frameCount) return true;
-		if (focused_ != null)
-		{
-			EndSession();
-			return true;
-		}
-		if (Time.timeScale != 0f && hovered_ != null && sessionEndedFrame_ != Time.frameCount)
-		{
-			focused_ = hovered_;
-			focused_.originalText_ = focused_.text ?? string.Empty;
-			focused_.active = true;
-			consumedFrame_ = true;
-			return true;
-		}
-		return false;
+		return consumedFrame_ || focused_ != null;
 	}
 
 	private static void EndSession(bool cancel = false)
@@ -124,6 +158,15 @@ public class WaypointNameInput : MonoBehaviour
 		}
 		consumedFrame_ = true;
 		sessionEndedFrame_ = Time.frameCount;
+		resumeOnConfirm_ = false;
+		// Keep IME disabled through the confirming Space/click frame.
+	}
+
+	private static void RestoreIme()
+	{
+		if (!imeOwned_) return;
+		Input.imeCompositionMode = previousImeMode_;
+		imeOwned_ = false;
 	}
 
 	private void Type()
@@ -134,15 +177,37 @@ public class WaypointNameInput : MonoBehaviour
 			text = text.Substring(0, text.Length - 1);
 			return;
 		}
+		Input.imeCompositionMode = IMECompositionMode.Off;
+		// Read the letter/digit keys even with a Chinese input method selected.
+		// Prefer key events to committed text so an IME candidate cannot replace the name.
+		bool hadKey = false;
+		for (int i = 0; i < 26; i++)
+		{
+			if (!Input.GetKeyDown((KeyCode)((int)KeyCode.A + i))) continue;
+			hadKey = true;
+			AppendAscii((char)('A' + i));
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			if (!Input.GetKeyDown((KeyCode)((int)KeyCode.Alpha0 + i))
+				&& !Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad0 + i))) continue;
+			hadKey = true;
+			AppendAscii((char)('0' + i));
+		}
+		if (hadKey) return;
 		string inputString = Input.inputString;
 		for (int i = 0; i < inputString.Length; i++)
 		{
-			char c = inputString[i];
-			if ((char.IsLetter(c) || char.IsNumber(c)) && text.Length < MAX_LENGTH)
-			{
-				text += c;
-				text = text.ToUpperInvariant();
-			}
+			AppendAscii(inputString[i]);
 		}
+	}
+
+	private void AppendAscii(char c)
+	{
+		// Normalize full-width Latin letters/digits; reject Han characters and symbols.
+		if (c >= '\uFF01' && c <= '\uFF5E') c = (char)(c - 0xFEE0);
+		if (c >= 'a' && c <= 'z') c = (char)(c - 'a' + 'A');
+		if (text.Length < MAX_LENGTH && ((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')))
+			text += c;
 	}
 }

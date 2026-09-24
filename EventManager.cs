@@ -65,6 +65,8 @@ public class EventManager : MonoBehaviour
 		weather_ = null;
 		f16Sprite_ = null;
 		b747Sprite_ = null;
+		// Aircraft appearance is independent of whether random events are enabled.
+		LoadAircraftSprites();
 		if (Settings.DISABLE_EVENTS)
 		{
 			return;
@@ -99,6 +101,10 @@ public class EventManager : MonoBehaviour
 		Utils.Shuffle(events_);
 		Plugin.Log.LogInfo("Event setup completed.");
 		StartCoroutine(StartEventCoroutine());
+	}
+
+	private static void LoadAircraftSprites()
+	{
 		PreLevel02Manager preLevel02Manager = (PreLevel02Manager)UnityEngine.Object.FindObjectOfType(typeof(PreLevel02Manager));
 		if (preLevel02Manager == null)
 		{
