@@ -166,7 +166,7 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 # 安装
 
 - 右键库中的Mini Airways，[属性 - 测试版 - mod_feat](https://partner.steamgames.com/doc/store/application/branches?l=schinese), 更新。最新版本的mod已经附带在该分支中。
-- 如果你想要替换回旧版的真实空管MOD，可以从这里下载 [MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll) 到 `<path_to_game>\Mini Airways\BepInEx\plugins`。
+- 如果你想要替换回旧版的真实空管MOD，可以从这里下载最初版本的 [MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll) 到 `<path_to_game>\Mini Airways\BepInEx\plugins`。
 
 # 提示
 
