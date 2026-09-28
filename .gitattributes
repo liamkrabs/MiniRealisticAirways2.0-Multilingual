@@ -1,0 +1,29 @@
+# Keep source, build metadata and project documentation as LF on every platform.
+*.cs text eol=lf
+*.csproj text eol=lf
+*.props text eol=lf
+*.targets text eol=lf
+*.sln text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.config text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.csv text eol=lf
+*.tsv text eol=lf
+*.cfg text eol=lf
+*.diff text eol=lf
+*.svg text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Preserve binary build and game assets byte-for-byte.
+*.dll binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.so binary
+*.dat binary
+*.x86_64 binary
