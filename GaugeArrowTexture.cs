@@ -38,7 +38,7 @@ public static class GaugeArrowTexture
 		{
 			return;
 		}
-		Plugin.Log?.LogInfo("Pre-rendered gauge texture.");
+		Plugin.LogDebug("Pre-rendered gauge texture.");
 		texture_ = DrawArrow();
 		rect_ = new Rect(0f, 3f, 90f, 30f);
 	}
@@ -62,7 +62,7 @@ public static class GaugeArrowTexture
 	{
 		if (texture_ != null || sprite_ != null)
 		{
-			Plugin.Log?.LogInfo("Gauge texture destroyed.");
+			Plugin.LogDebug("Gauge texture destroyed.");
 			if (sprite_ != null)
 			{
 				Object.Destroy(sprite_);

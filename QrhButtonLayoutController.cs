@@ -168,7 +168,7 @@ internal sealed class QrhButtonLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("QRH width measurement deferred until the stock locale font is ready: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("QRH width measurement deferred until the stock locale font is ready: " + exception.GetBaseException().Message);
 		}
 	}
 
@@ -211,7 +211,7 @@ internal sealed class QrhButtonLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("QRH source metrics deferred until stock localization finishes: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("QRH source metrics deferred until stock localization finishes: " + exception.GetBaseException().Message);
 		}
 	}
 

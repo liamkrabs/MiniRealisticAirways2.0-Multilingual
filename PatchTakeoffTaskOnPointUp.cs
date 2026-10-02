@@ -45,23 +45,25 @@ internal class PatchTakeoffTaskOnPointUp
 		{
 			return false;
 		}
-		if (TakeoffTask.CurrentCommandingTakeoffPoint == null && __instance.apron != null && __instance.apron.gameObject != null)
+		if (TakeoffTask.CurrentCommandingTakeoffPoint == null)
 		{
 			return true;
 		}
-		BaseAircraftType component = __instance.GetComponent<BaseAircraftType>();
-		if (component == null)
-		{
-			return true;
-		}
-		WindSock windsock_ = Plugin.windsock_;
 		RunwayRef runwayRef = TakeoffTask.CurrentCommandingTakeoffPoint.GetComponent<RunwayRef>();
 		if (runwayRef == null)
 		{
 			return true;
 		}
 		Runway runway = runwayRef.runway;
-		if (windsock_ == null || runway == null)
+		if (RunwayClose.IsRunwayClosed(runway))
+		{
+			Plugin.Log?.LogInfo("Rejected due to runway closed event.");
+			RejectTakeoff(ref __instance);
+			return false;
+		}
+		BaseAircraftType component = __instance.GetComponent<BaseAircraftType>();
+		WindSock windsock_ = Plugin.windsock_;
+		if (component == null || windsock_ == null || runway == null)
 		{
 			return true;
 		}
@@ -72,12 +74,6 @@ internal class PatchTakeoffTaskOnPointUp
 		}
 		if (!windsock_.CanLand(num, component.weight_))
 		{
-			RejectTakeoff(ref __instance);
-			return false;
-		}
-		if (RunwayClose.IsRunwayClosed(runway))
-		{
-			Plugin.Log?.LogInfo("Rejected due to runway closed event.");
 			RejectTakeoff(ref __instance);
 			return false;
 		}

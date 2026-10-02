@@ -33,7 +33,7 @@ internal partial class WindSock
 		{
 			return true;
 		}
-		Plugin.Log.LogInfo("Go-around induced by wind. Current wind: " + windDirection_ + " Current Heading: " + heading + " Angle: " + num + " Probability " + probability);
+		Plugin.LogDebug("Go-around induced by wind. Current wind: " + windDirection_ + " Current Heading: " + heading + " Angle: " + num + " Probability " + probability);
 		return false;
 	}
 
@@ -85,7 +85,7 @@ internal partial class WindSock
 			float timeGradient = updateTime / UPDATE_COUNT;
 			float directionChange = RandomDirection();
 			float windGradient = directionChange / UPDATE_COUNT;
-			Plugin.Log.LogInfo("Wind updated, moving from " + windDirection_ + " by " + directionChange + " degrees in " + updateTime + " seconds.");
+			Plugin.LogDebug("Wind updated, moving from " + windDirection_ + " by " + directionChange + " degrees in " + updateTime + " seconds.");
 			WaitForSeconds updateDelay = new WaitForSeconds(timeGradient);
 			for (int i = 0; i < UPDATE_COUNT && windsock_ != null; i++)
 			{

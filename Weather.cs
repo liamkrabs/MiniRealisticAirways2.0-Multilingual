@@ -239,7 +239,7 @@ public class Weather : MonoBehaviour
 				Plugin.Log.LogWarning("INF Loop in GenerateWeatherCoroutine().");
 			}
 		}
-		Plugin.Log.LogInfo("Moving weather towards (" + xDirection + ", " + yDirection + ")");
+		Plugin.LogDebug("Moving weather towards (" + xDirection + ", " + yDirection + ")");
 		WaitForSeconds moveDelay = new WaitForSeconds(2.1666667f);
 		for (int j = 0; (float)j < 30f && cells_ != null; j++)
 		{

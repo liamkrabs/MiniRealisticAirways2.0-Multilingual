@@ -13,6 +13,7 @@ internal class PatchPlaceableWaypointStart
 		{
 			return true;
 		}
+		WaypointVisualPriority.Attach(__instance);
 		WaypointState waypointState = __instance.GetComponent<WaypointState>();
 		if (waypointState == null)
 		{

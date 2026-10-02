@@ -1,11 +1,9 @@
 <Project>
   <!-- One version source for the DLL attributes, plugin constants and packaging. -->
   <PropertyGroup>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <BuildLabel>Public</BuildLabel>
     <BuildId>$(Version)-$(BuildLabel)</BuildId>
     <AssemblyVersion>$(Version).0</AssemblyVersion>
   </PropertyGroup>
 </Project>
-
-

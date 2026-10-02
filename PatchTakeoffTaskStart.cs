@@ -20,7 +20,7 @@ internal class PatchTakeoffTaskStart
 			baseAircraftType = __instance.gameObject.AddComponent<BaseAircraftType>();
 		}
 		baseAircraftType.weight_ = BaseAircraftType.RandomWeight();
-		Plugin.Log.LogInfo("TakeoffTask started with weight: " + baseAircraftType.weight_);
+		Plugin.LogDebug("TakeoffTask started with weight: " + baseAircraftType.weight_);
 		if (___AP != null)
 		{
 			___AP.raycastTarget = true;

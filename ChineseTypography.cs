@@ -111,7 +111,7 @@ internal static class ChineseTypography
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Stock TMP typography is not ready; deferred retry will resync it: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Stock TMP typography is not ready; deferred retry will resync it: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}
@@ -154,7 +154,7 @@ internal static class ChineseTypography
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Localized text mesh refresh failed: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Localized text mesh refresh failed: " + exception.GetBaseException().Message);
 		}
 	}
 

@@ -87,7 +87,7 @@ public class MainMenuManagerPatch
 				AudioManager.instance.StartCoroutine(Tutorial.ShowTutorialCoroutine(manualTrigger: true));
 			}
 		});
-		Plugin.Log?.LogInfo("QRH button initialized.");
+		Plugin.LogDebug("QRH button initialized.");
 		return true;
 	}
 

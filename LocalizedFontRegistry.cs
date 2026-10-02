@@ -86,7 +86,7 @@ internal static class LocalizedFontRegistry
 		{
 			hudFont_ = regular;
 		}
-		Plugin.Log?.LogDebug("Prepared locale font roles for " + localeCode + ".");
+		Plugin.LogDebug("Prepared locale font roles for " + localeCode + ".");
 	}
 
 	private static TMP_FontAsset PrepareRoleFont(string expectedName, string sourceName, string visibleText, bool forceRuntime)
@@ -382,7 +382,7 @@ internal static class LocalizedFontRegistry
 				PrepareFont(runtime);
 				RegisterFont(runtime);
 				runtimeFonts_[key] = runtime;
-				Plugin.Log?.LogInfo("Created same-face runtime TMP atlas for " + sourceName + " (role font " + expectedName + ").");
+				Plugin.LogDebug("Created same-face runtime TMP atlas for " + sourceName + " (role font " + expectedName + ").");
 			}
 			catch (Exception exception)
 			{
@@ -434,7 +434,7 @@ internal static class LocalizedFontRegistry
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Stock TMP material copy was skipped: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Stock TMP material copy was skipped: " + exception.GetBaseException().Message);
 		}
 	}
 
@@ -468,7 +468,7 @@ internal static class LocalizedFontRegistry
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("TMP font lookup initialization failed for " + font.name + ": " + exception.GetBaseException().Message);
+			Plugin.LogDebug("TMP font lookup initialization failed for " + font.name + ": " + exception.GetBaseException().Message);
 		}
 	}
 
@@ -484,7 +484,7 @@ internal static class LocalizedFontRegistry
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("TMP material reference registration failed for " + font.name + ": " + exception.GetBaseException().Message);
+			Plugin.LogDebug("TMP material reference registration failed for " + font.name + ": " + exception.GetBaseException().Message);
 		}
 	}
 
@@ -596,10 +596,19 @@ internal static class LocalizedFontRegistry
 		}
 
 		TMP_Text[] labels = Resources.FindObjectsOfTypeAll<TMP_Text>();
+		var referencedFonts = new HashSet<TMP_FontAsset>();
+		foreach (TMP_Text label in labels)
+			if (label != null) CollectReferencedFont(label.font, referencedFonts);
+		// Rich-text/Bold and fallback glyphs can render through a child mesh
+		// while the parent's primary font belongs to a different face.
+		foreach (TMP_SubMeshUI mesh in Resources.FindObjectsOfTypeAll<TMP_SubMeshUI>())
+			if (mesh != null) CollectReferencedFont(mesh.fontAsset, referencedFonts);
+		foreach (TMP_SubMesh mesh in Resources.FindObjectsOfTypeAll<TMP_SubMesh>())
+			if (mesh != null) CollectReferencedFont(mesh.fontAsset, referencedFonts);
 		List<string> idleKeys = new List<string>();
 		foreach (KeyValuePair<string, TMP_FontAsset> pair in runtimeFonts_)
 		{
-			if (pair.Value == null || !IsFontReferencedByLiveText(pair.Value, labels))
+			if (pair.Value == null || (!referencedFonts.Contains(pair.Value) && !IsFontReferencedByLiveText(pair.Value, labels)))
 			{
 				idleKeys.Add(pair.Key);
 			}
@@ -633,8 +642,21 @@ internal static class LocalizedFontRegistry
 			fontAssets_ = null;
 			hudFont_ = null;
 			hudBoldFont_ = null;
-			Plugin.Log?.LogInfo("Retired " + removedNames.Count + " unused runtime font atlas(es): " + string.Join(", ", removedNames) + ".");
+			Plugin.LogDebug("Retired " + removedNames.Count + " unused runtime font atlas(es): " + string.Join(", ", removedNames) + ".");
 		}
+	}
+
+	private static void CollectReferencedFont(TMP_FontAsset font, HashSet<TMP_FontAsset> referenced)
+	{
+		if (font == null || !referenced.Add(font)) return;
+		if (font.fallbackFontAssetTable != null)
+			foreach (TMP_FontAsset fallback in font.fallbackFontAssetTable) CollectReferencedFont(fallback, referenced);
+		if (font.fontWeightTable != null)
+			foreach (TMP_FontWeightPair pair in font.fontWeightTable)
+			{
+				CollectReferencedFont(pair.regularTypeface, referenced);
+				CollectReferencedFont(pair.italicTypeface, referenced);
+			}
 	}
 
 	private static bool IsFontReferencedByLiveText(TMP_FontAsset font, TMP_Text[] labels)

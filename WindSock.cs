@@ -274,7 +274,7 @@ internal partial class WindSock : MonoBehaviour
 			arrowGeometryReady_ = false;
 			cachedArrowVisiblePoints_ = null;
 			arrowGeometrySource_ = ArrowGeometrySource.None;
-			Plugin.Log?.LogDebug("Wind arrow Sprite geometry was unavailable: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind arrow Sprite geometry was unavailable: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}
@@ -422,7 +422,7 @@ internal partial class WindSock : MonoBehaviour
 		if (mainCamera_ == null) mainCamera_ = Camera.main;
 		// 暂停只冻结模拟与数值；视图仍跟随相机和布局变化，避免箭头与文字错位。
 		bool directionReady = WindArrowVisual.SetWindDirection(windsockImage_, mainCamera_, windDirection_);
-		if (!directionReady && !windDirectionFailed_) Plugin.Log?.LogDebug("Wind direction unavailable: check Image, parent RectTransform and cameras.");
+		if (!directionReady && !windDirectionFailed_) Plugin.LogDebug("Wind direction unavailable: check Image, parent RectTransform and cameras.");
 		windDirectionFailed_ = !directionReady;
 		if (Plugin.showText_ && text_ != null && textGameObject_ != null)
 		{
@@ -453,7 +453,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD layout deferred until the locale font is ready: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD layout deferred until the locale font is ready: " + exception.GetBaseException().Message);
 		}
 	}
 
@@ -490,7 +490,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD visible-bound measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD visible-bound measurement deferred: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}
@@ -511,7 +511,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD reference-character measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD reference-character measurement deferred: " + exception.GetBaseException().Message);
 		}
 		return 0.5f;
 	}
@@ -601,7 +601,7 @@ internal partial class WindSock : MonoBehaviour
 			float finalTextCenterY = (finalVisibleBottomPixels + finalVisibleTopPixels) * 0.5f;
 			float finalVerticalDeltaPixels = finalTextCenterY - arrowCenterYPixels;
 			string fontName = text_.font == null ? "<null>" : text_.font.name;
-			Plugin.Log?.LogInfo("Wind HUD geometry locale=" + ModLocalization.CurrentLocaleCode + " font=" + fontName + " source=" + ArrowGeometrySourceName(arrowGeometrySource_) + " positioningApplied=" + positionedAgainstArrow + " verticalApplied=" + verticalAlignmentApplied + " arrowRightPx=" + arrowRightPixels.ToString("0.###") + " textVisibleLeftPx=" + finalVisibleLeftPixels.ToString("0.###") + " actualGapPx=" + actualGapPixels.ToString("0.###") + " targetGapPx=" + targetGapPixels.ToString("0.###") + " arrowCenterYPx=" + arrowCenterYPixels.ToString("0.###") + " textCenterYPx=" + finalTextCenterY.ToString("0.###") + " verticalErrorPx=" + finalVerticalDeltaPixels.ToString("0.###") + " referenceCharacterPx=" + referenceCharacterPixels.ToString("0.###"));
+			Plugin.LogDebug("Wind HUD geometry locale=" + ModLocalization.CurrentLocaleCode + " font=" + fontName + " source=" + ArrowGeometrySourceName(arrowGeometrySource_) + " positioningApplied=" + positionedAgainstArrow + " verticalApplied=" + verticalAlignmentApplied + " arrowRightPx=" + arrowRightPixels.ToString("0.###") + " textVisibleLeftPx=" + finalVisibleLeftPixels.ToString("0.###") + " actualGapPx=" + actualGapPixels.ToString("0.###") + " targetGapPx=" + targetGapPixels.ToString("0.###") + " arrowCenterYPx=" + arrowCenterYPixels.ToString("0.###") + " textCenterYPx=" + finalTextCenterY.ToString("0.###") + " verticalErrorPx=" + finalVerticalDeltaPixels.ToString("0.###") + " referenceCharacterPx=" + referenceCharacterPixels.ToString("0.###"));
 			windGeometryDiagnosticLogged_ = true;
 		}
 	}
@@ -634,7 +634,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD arrow center was unavailable: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD arrow center was unavailable: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}
@@ -677,7 +677,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD text screen bounds were unavailable: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD text screen bounds were unavailable: " + exception.GetBaseException().Message);
 		}
 		return false;
 	}
@@ -698,7 +698,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD reference-character screen measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD reference-character screen measurement deferred: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}
@@ -742,7 +742,7 @@ internal partial class WindSock : MonoBehaviour
 			}
 			catch (Exception exception)
 			{
-				Plugin.Log?.LogDebug("Wind arrow renderer bounds were unavailable: " + exception.GetBaseException().Message);
+				Plugin.LogDebug("Wind arrow renderer bounds were unavailable: " + exception.GetBaseException().Message);
 			}
 		}
 		if (windsockImage_ != null && windsockImage_.rectTransform != null)
@@ -757,7 +757,7 @@ internal partial class WindSock : MonoBehaviour
 			}
 			catch (Exception exception)
 			{
-				Plugin.Log?.LogDebug("Wind arrow bounds were unavailable: " + exception.GetBaseException().Message);
+				Plugin.LogDebug("Wind arrow bounds were unavailable: " + exception.GetBaseException().Message);
 			}
 		}
 		if (windsockRectTransform_ != null)
@@ -772,7 +772,7 @@ internal partial class WindSock : MonoBehaviour
 			}
 			catch (Exception exception)
 			{
-				Plugin.Log?.LogDebug("Wind arrow fallback bounds were unavailable: " + exception.GetBaseException().Message);
+				Plugin.LogDebug("Wind arrow fallback bounds were unavailable: " + exception.GetBaseException().Message);
 			}
 		}
 		if (!windGeometryMissingLogged_)
@@ -883,7 +883,7 @@ internal partial class WindSock : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Wind HUD RectTransform screen bounds were unavailable: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Wind HUD RectTransform screen bounds were unavailable: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}

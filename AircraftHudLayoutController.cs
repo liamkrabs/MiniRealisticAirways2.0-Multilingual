@@ -350,7 +350,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Aircraft HUD visible-bound measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Aircraft HUD visible-bound measurement deferred: " + exception.GetBaseException().Message);
 			return fallback;
 		}
 	}
@@ -381,7 +381,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Aircraft HUD colon-bound measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Aircraft HUD colon-bound measurement deferred: " + exception.GetBaseException().Message);
 		}
 		return GetVisibleEdgeInAircraft(label, left, fallback);
 	}
@@ -401,7 +401,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Aircraft HUD space-width coordinate conversion deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Aircraft HUD space-width coordinate conversion deferred: " + exception.GetBaseException().Message);
 			return 0f;
 		}
 	}
@@ -420,7 +420,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		{
 			return;
 		}
-		Plugin.Log?.LogInfo("Aircraft HUD geometry locale=" + ModLocalization.CurrentLocaleCode + " rtl=" + ModLocalization.IsRtl + " altitudeSpaceAdvance=" + altitudeSpaceWidth.ToString("0.###") + " speedSpaceAdvance=" + speedSpaceWidth.ToString("0.###") + " altitudeTargetGap=" + altitudeIndicatorTextGap.ToString("0.###") + " speedTargetGap=" + speedIndicatorTextGap.ToString("0.###") + " altitudeGap=" + altitudeActualGap.ToString("0.###") + " speedGap=" + speedActualGap.ToString("0.###") + " altitudeColon=" + altitudeColonEdge.ToString("0.###") + " speedColon=" + speedColonEdge.ToString("0.###"));
+		Plugin.LogDebug("Aircraft HUD geometry locale=" + ModLocalization.CurrentLocaleCode + " rtl=" + ModLocalization.IsRtl + " altitudeSpaceAdvance=" + altitudeSpaceWidth.ToString("0.###") + " speedSpaceAdvance=" + speedSpaceWidth.ToString("0.###") + " altitudeTargetGap=" + altitudeIndicatorTextGap.ToString("0.###") + " speedTargetGap=" + speedIndicatorTextGap.ToString("0.###") + " altitudeGap=" + altitudeActualGap.ToString("0.###") + " speedGap=" + speedActualGap.ToString("0.###") + " altitudeColon=" + altitudeColonEdge.ToString("0.###") + " speedColon=" + speedColonEdge.ToString("0.###"));
 		lastGeometryDiagnosticRevision_ = ModLocalization.Revision;
 	}
 
@@ -452,7 +452,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Aircraft HUD width measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Aircraft HUD width measurement deferred: " + exception.GetBaseException().Message);
 			return 0f;
 		}
 	}
@@ -482,7 +482,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Aircraft HUD space-width measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Aircraft HUD space-width measurement deferred: " + exception.GetBaseException().Message);
 			return 0f;
 		}
 	}
@@ -500,7 +500,7 @@ internal sealed class AircraftHudLayoutController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Aircraft HUD height measurement deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Aircraft HUD height measurement deferred: " + exception.GetBaseException().Message);
 			return 0f;
 		}
 	}

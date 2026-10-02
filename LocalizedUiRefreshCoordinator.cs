@@ -87,7 +87,7 @@ internal sealed class LocalizedUiRefreshCoordinator : MonoBehaviour
 			else
 			{
 				// 期间版本号又被推进：不能静默丢弃这次请求，立即回到循环顶端取最新。
-				Plugin.Log?.LogDebug("Locale commit for " + localeCode + " was superseded; retrying with the latest request.");
+				Plugin.LogDebug("Locale commit for " + localeCode + " was superseded; retrying with the latest request.");
 			}
 
 			if (generation == requestedGeneration_)

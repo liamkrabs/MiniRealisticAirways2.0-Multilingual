@@ -4,6 +4,15 @@
 
 This is a mini yet realistic air traffic control mod for Mini Airways.
 
+# v2.0.3 Update
+
+[Download MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll) · [Release notes](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/tag/v2.0.3)
+
+- **Fuel:** Replaces the droplet gauge with a fuel-can icon while retaining fuel-level shading and low-fuel blinking.
+- **Waypoints:** Improves the display priority of navigation waypoints and their attached information, reducing overlap with other map elements.
+- **QRH:** Updates the final-page handbook link to this multilingual repository and adds a separate original-mod download link, with text in all 15 supported languages.
+- **Other:** Bug fixes and stability improvements.
+
 # v2.0 Code Changes (Compared with the Original Version)
 
 - **Multilingual support:** Adds built-in localization for English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Arabic, Dutch, French, German, Polish, Portuguese, Russian, Spanish, Turkish, and Ukrainian. The tutorial, QRH, settings toggles, aircraft/waypoint HUD, wind-direction text, fuel/aircraft-type text, and engine failure dialogue follow the game language and can be switched without restarting.
@@ -14,8 +23,10 @@ This is a mini yet realistic air traffic control mod for Mini Airways.
 
 # Installation
 
-- Right-click Mini Airways in your Steam library, open **Properties → Betas → `mod_feat`** ([branch documentation](https://partner.steamgames.com/doc/store/application/branches?l=schinese)), and update the game. The latest version of the mod is already included in this branch.
-- If you want to switch back to the older Realistic Airways mod, download [MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll) and place it in `<path_to_game>\Mini Airways\BepInEx\plugins`.
+- Use the Mini Airways Mono mod branch (`mod_feat`) with BepInEx installed.
+- Quit the game, download [MiniRealisticAirways.dll for v2.0.3](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll), and replace `BepInEx/plugins/MiniRealisticAirways.dll` in your game directory. Keep the old DLL backup outside `plugins`.
+- This GitHub release does not automatically update the version bundled with the Steam branch.
+- If you want to switch back to the older mod, download the [original MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll) and replace the same file.
 
 # Tips
 
@@ -86,9 +97,9 @@ Aircraft will have the following three types: light<img src="img/light.png" widt
 
 <img src="img/apronsize.png" width=20% height=20%>
 
-Each arrival aircraft type carries a different amount of fuel, if fuel runs out and the aircraft is still in the air, the game will end. You can tell their remaining fuel amount by the droplet-shaped fuel gauge located on the top-right of each arrival aircraft. When an aircraft's fuel tank is less than 30%, its fuel gauge will blink.
+Each arrival aircraft type carries a different amount of fuel, if fuel runs out and the aircraft is still in the air, the game will end. You can tell their remaining fuel amount by the fuel-can-shaped fuel gauge located on the top-right of each arrival aircraft. When an aircraft's fuel tank is less than 30%, its fuel gauge will blink.
 
-<img src="img/fuel.png" width=10% height=10%>
+<img src="img/fuel-icon.png" width=10% height=10%>
 
 Light aircraft have the following behavior:
 - Plane icon size is small.
@@ -155,6 +166,15 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 
 这是一个既迷你又真实的迷你空管Mod。
 
+# v2.0.3 更新
+
+[下载 MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll) · [版本说明](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/tag/v2.0.3)
+
+- **油料：** 将水滴油量图标替换为油桶图标，保留油量明暗变化和低油量闪烁。
+- **航点：** 提高导航航点及附属信息的显示优先级，减少被其他地图元素遮挡的情况。
+- **QRH：** 最后一页的快速检查单链接改为本多语言仓库，增加独立的最初版本下载入口，说明文字覆盖现有 15 种语言。
+- **其他：** bug 修复与稳定性改进。
+
 # v2.0 代码变化（相对原仓库版本）
 
 - **多语言支持：** 新增内置本地化：英语、简体中文、繁体中文、日语、韩语、阿拉伯语、荷兰语、法语、德语、波兰语、葡萄牙语、俄语、西班牙语、土耳其语和乌克兰语。教程、QRH、设置开关、飞机/航点 HUD、风向文字、燃油/机型文字和引擎故障对白会跟随游戏语言，并支持不重启切换。
@@ -165,8 +185,10 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 
 # 安装
 
-- 右键库中的Mini Airways，[属性 - 测试版 - mod_feat](https://partner.steamgames.com/doc/store/application/branches?l=schinese), 更新。最新版本的mod已经附带在该分支中。
-- 如果你想要替换回旧版的真实空管MOD，可以从这里下载最初版本的 [MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll) 到 `<path_to_game>\Mini Airways\BepInEx\plugins`。
+- 使用已配置 BepInEx 的 Mini Airways Mono mod 分支（`mod_feat`）。
+- 退出游戏，下载 [v2.0.3 的 MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll)，替换游戏目录中的 `BepInEx/plugins/MiniRealisticAirways.dll`。旧 DLL 请备份到 `plugins` 目录之外。
+- 本次 GitHub 发布不会自动更新 Steam 分支中的内置版本。
+- 如果想替换回旧版，可以下载[最初版本的 MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll)，替换同一文件。
 
 # 提示
 
@@ -229,9 +251,9 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 
 <img src="img/apronsize.png" width=20% height=20%>
 
-进场飞机会拥有燃油限制，如果燃油耗尽前飞机没有降落的话游戏就会结束。可以通过右上角的水滴图标判断剩余燃料，当剩余燃料不足30%时，此图标会闪烁。
+进场飞机会拥有燃油限制，如果燃油耗尽前飞机没有降落的话游戏就会结束。可以通过右上角的油桶图标判断剩余燃料，当剩余燃料不足30%时，此图标会闪烁。
 
-<img src="img/fuel_cn.png" width=10% height=10%>
+<img src="img/fuel-icon.png" width=10% height=10%>
 
 轻型飞机拥有以下特性:
 - 最大速度为中<img src="img/norm.png" width=2% height=2%>。如果通过具有快<img src="img/fast.png" width=2% height=2%>的航点，速度也只会变为中<img src="img/norm.png" width=2% height=2%>。

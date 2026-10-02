@@ -60,7 +60,7 @@ public class AircraftType : BaseAircraftType
 			{
 				blinkCoroutine = Animation.BlinkCoroutine(fuelGauge_.spriteRenderer_);
 				StartCoroutine(blinkCoroutine);
-				Plugin.Log.LogInfo("Fuel is low, started blinkCoroutine.");
+				Plugin.LogDebug("Fuel is low, started blinkCoroutine.");
 			}
 			if (percentFuelLeft_ <= 20 && blinkCoroutine != null && emergencyCoroutine == null && fuelGauge_ != null && fuelGauge_.spriteRenderer_ != null)
 			{
@@ -72,7 +72,7 @@ public class AircraftType : BaseAircraftType
 				StartCoroutine(blinkCoroutine);
 				emergencyCoroutine = EmergencyCoroutine(aircraft_);
 				StartCoroutine(emergencyCoroutine);
-				Plugin.Log.LogInfo("Fuel is super low, started emergencyCoroutine.");
+				Plugin.LogDebug("Fuel is super low, started emergencyCoroutine.");
 			}
 			if (percentFuelLeft_ >= 0 && fuelGauge_ != null && fuelGauge_.spriteRenderer_ != null && FuelGaugeTextures.fuelTextures_ != null && FuelGaugeTextures.fuelTextures_.Count > percentFuelLeft_)
 			{

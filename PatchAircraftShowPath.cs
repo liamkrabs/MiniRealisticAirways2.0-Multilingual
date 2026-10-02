@@ -39,7 +39,7 @@ internal static class PatchAircraftShowPath
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Landing path renderer was unavailable; skipping path fade: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Landing path renderer was unavailable; skipping path fade: " + exception.GetBaseException().Message);
 			return false;
 		}
 
@@ -64,7 +64,7 @@ internal static class PatchAircraftShowPath
 				}
 				catch (Exception exception)
 				{
-					Plugin.Log?.LogDebug("Landing path fade-out was skipped after renderer teardown: " + exception.GetBaseException().Message);
+					Plugin.LogDebug("Landing path fade-out was skipped after renderer teardown: " + exception.GetBaseException().Message);
 				}
 			});
 		return false;
@@ -86,7 +86,7 @@ internal static class PatchAircraftShowPath
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Landing path tween cleanup skipped after renderer teardown: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Landing path tween cleanup skipped after renderer teardown: " + exception.GetBaseException().Message);
 		}
 	}
 }

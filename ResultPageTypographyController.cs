@@ -90,7 +90,7 @@ internal sealed class ResultPageTypographyController : MonoBehaviour
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Result page aircraft-count label lookup deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Result page aircraft-count label lookup deferred: " + exception.GetBaseException().Message);
 			return;
 		}
 		if (totalLabel_ == null)
@@ -175,12 +175,12 @@ internal sealed class ResultPageTypographyController : MonoBehaviour
 				appliedLocaleRevision_ = ModLocalization.Revision;
 				appliedText_ = totalLabel_.text;
 				appliedWidth_ = desiredWidth;
-				Plugin.Log?.LogInfo("Result page aircraft-count label forced to one line: locale=" + ModLocalization.CurrentLocaleCode + ", width=" + desiredWidth.ToString("0.##") + ", text=" + (totalLabel_.text ?? string.Empty));
+				Plugin.LogDebug("Result page aircraft-count label forced to one line: locale=" + ModLocalization.CurrentLocaleCode + ", width=" + desiredWidth.ToString("0.##"));
 			}
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Result page aircraft-count layout deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Result page aircraft-count layout deferred: " + exception.GetBaseException().Message);
 		}
 	}
 

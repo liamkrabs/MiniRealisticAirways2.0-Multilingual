@@ -38,7 +38,7 @@ internal class PatchCreateOutboundAircraft
 		if (aircraftType_ != null && component != null && component.active_)
 		{
 			aircraftType_.weight_ = component.weight_;
-			Plugin.Log.LogDebug("Transferred aircraft with weight: " + aircraftType_.weight_);
+			Plugin.LogDebug("Transferred aircraft with weight: " + aircraftType_.weight_);
 		}
 	}
 }

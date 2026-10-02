@@ -143,7 +143,7 @@ internal static class PatchDiscordControllerRuntime
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Could not read Discord SDK state: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Could not read Discord SDK state: " + exception.GetBaseException().Message);
 			return null;
 		}
 	}

@@ -99,7 +99,7 @@ public class EventManager : MonoBehaviour
 			badWeatherEvent
 		};
 		Utils.Shuffle(events_);
-		Plugin.Log.LogInfo("Event setup completed.");
+		Plugin.LogDebug("Event setup completed.");
 		StartCoroutine(StartEventCoroutine());
 	}
 

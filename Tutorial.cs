@@ -252,6 +252,7 @@ public static class Tutorial
 				linkHandler = currentModal.description.gameObject.AddComponent<LinkHandler>();
 			}
 			linkHandler.url = ModLocalization.Get("tutorial.docsUrl");
+			linkHandler.originalVersionUrl = ModLocalization.Get("tutorial.originalUrl");
 			return;
 		}
 

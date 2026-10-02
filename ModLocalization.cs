@@ -136,7 +136,7 @@ internal static partial class ModLocalization
 		StringBuilder result = new StringBuilder(1024);
 		foreach (KeyValuePair<string, string> pair in values)
 		{
-			if (string.Equals(pair.Key, "tutorial.docsUrl", StringComparison.Ordinal))
+			if (pair.Key.EndsWith("Url", StringComparison.Ordinal))
 			{
 				continue;
 			}
@@ -301,7 +301,7 @@ internal static partial class ModLocalization
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Locale re-sync check skipped: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Locale re-sync check skipped: " + exception.GetBaseException().Message);
 			return false;
 		}
 	}
@@ -410,7 +410,8 @@ internal static partial class ModLocalization
 			("tutorial.title", "Mini Realistic Airways"),
 			("tutorial.qrh", "Quick Reference Handbook"),
 			("tutorial.next", "Next"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Enable Wind"), ("settings.events", "Enable Events"), ("settings.tcas", "Enable TCAS & GPWS"),
 			("hud.wind", "Wind: {0}°"), ("hud.altitudePrefix", "ALT: "), ("hud.speedPrefix", "SPD: "),
 			("hud.fuel", "Fuel: {0}%"), ("hud.fuelInfinite", "Fuel: ∞"), ("hud.weight", "Weight: {0}"),
@@ -432,14 +433,15 @@ internal static partial class ModLocalization
 			("tutorial.page.last.heading", "Last"),
 			("tutorial.page.last.description", "\nUse <b><u>Tab</u></b> to hide or show in-game text.\nTCAS commands aircraft to climb or descend before a collision.\nGPWS commands aircraft to climb before terrain impact.\nYou start with 3 waiting-area upgrades.\nUpgrades arrive twice as fast.\nAircraft flying out of bounds count as restricted-area violations.\nPress <b><u>Space</u></b> while placing a waypoint to name it."),
 			("tutorial.page.thanks.heading", "Thanks for playing \"Mini Realistic Airways\"!"),
-			("tutorial.page.thanks.description", "For more information, refer to the <b><u><link=\"ENG\">Quick Reference Handbook</link></u></b>"));
+			("tutorial.page.thanks.description", "For more information, refer to the <b><u><link=\"docs\">Quick Reference Handbook</link></u></b>\n\nIf you want to switch back to the older Mini Realistic Airways mod, you can download the <b><u><link=\"original\">original version</link></u></b> here."));
 	}
 
 	private static void RegisterSimplifiedChinese(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "zh-Hans",
 			("tutorial.title", "真实迷你空管"), ("tutorial.qrh", "快速检查单"), ("tutorial.next", "下一页"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#%E8%BF%B7%E4%BD%A0%E7%9C%9F%E5%AE%9E%E7%A9%BA%E7%AE%A1"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "启用风向"), ("settings.events", "启用特情"), ("settings.tcas", "启用TCAS与GPWS"),
 			("hud.wind", "风向：{0}°"), ("hud.altitudePrefix", "高度："), ("hud.speedPrefix", "速度："),
 			("hud.fuel", "燃油：{0}%"), ("hud.fuelInfinite", "燃油：∞"), ("hud.weight", "机型：{0}"),
@@ -452,14 +454,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "特情"), ("tutorial.page.events.description", "意外随时可能发生。\n跑道事故可能导致跑道关闭。\n低油量飞机可能需要立即降落。\n发动机故障飞机需要立即返场。\n恶劣天气会把<b><u>低</u></b>、<b><u>中</u></b>空域变成禁飞区。"),
 			("tutorial.page.wind.heading", "风向"), ("tutorial.page.wind.description", "风向会影响飞机起降性能，当前风向显示在左上角。\n完全顺风起降时，复飞或中断起飞概率较高。\n风向与跑道夹角不超过90度时，概率为0%。"),
 			("tutorial.page.last.heading", "最后"), ("tutorial.page.last.description", "\n按<b><u>Tab</u></b>隐藏或显示游戏文字。\nTCAS会在碰撞前命令飞机爬升或下降。\nGPWS会在撞山前命令飞机爬升。\n开局获得3个等待区升级，升级速度加倍。\n飞出边界算作进入禁飞区。\n放置航点时按<b><u>空格</u></b>可以命名。"),
-			("tutorial.page.thanks.heading", "感谢您游玩“真实迷你空管”！"), ("tutorial.page.thanks.description", "更多信息请参阅<b><u><link=\"CHS\">快速检查单</link></u></b>"));
+			("tutorial.page.thanks.heading", "感谢您游玩“真实迷你空管”！"), ("tutorial.page.thanks.description", "更多信息请参阅<b><u><link=\"docs\">快速检查单</link></u></b>\n\n如果你想要替换回旧版的真实空管MOD，可以从这里下载<b><u><link=\"original\">最初版本</link></u></b>。"));
 	}
 
 	private static void RegisterTraditionalChinese(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "zh-Hant",
 			("tutorial.title", "真實迷你空管"), ("tutorial.qrh", "快速檢查單"), ("tutorial.next", "下一頁"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#%E8%BF%B7%E4%BD%A0%E7%9C%9F%E5%AF%A6%E7%A9%BA%E7%AE%A1"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "啟用風向"), ("settings.events", "啟用特情"), ("settings.tcas", "啟用TCAS與GPWS"),
 			("hud.wind", "風向：{0}°"), ("hud.altitudePrefix", "高度："), ("hud.speedPrefix", "速度："),
 			("hud.fuel", "燃油：{0}%"), ("hud.fuelInfinite", "燃油：∞"), ("hud.weight", "機型：{0}"),
@@ -472,14 +475,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "特情"), ("tutorial.page.events.description", "意外隨時可能發生。\n跑道事故可能導致跑道關閉。\n低油量飛機可能需要立即降落。\n引擎故障飛機需要立即返場。\n惡劣天氣會把<b><u>低</u></b>、<b><u>中</u></b>空域變成禁飛區。"),
 			("tutorial.page.wind.heading", "風向"), ("tutorial.page.wind.description", "風向會影響飛機起降性能，目前風向顯示於左上角。\n完全順風起降時，重飛或中斷起飛機率較高。\n風向與跑道夾角不超過90度時，機率為0%。"),
 			("tutorial.page.last.heading", "最後"), ("tutorial.page.last.description", "\n按<b><u>Tab</u></b>隱藏或顯示遊戲文字。\nTCAS會在碰撞前命令飛機爬升或下降。\nGPWS會在撞山前命令飛機爬升。\n開局獲得3個等待區升級，升級速度加倍。\n飛出邊界算作進入禁飛區。\n放置航點時按<b><u>空白鍵</u></b>可以命名。"),
-			("tutorial.page.thanks.heading", "感謝您遊玩「真實迷你空管」！"), ("tutorial.page.thanks.description", "更多資訊請參閱<b><u><link=\"CHS\">快速檢查單</link></u></b>"));
+			("tutorial.page.thanks.heading", "感謝您遊玩「真實迷你空管」！"), ("tutorial.page.thanks.description", "更多資訊請參閱<b><u><link=\"docs\">快速檢查單</link></u></b>\n\n如果你想換回舊版的真實空管 MOD，可以在這裡下載<b><u><link=\"original\">最初版本</link></u></b>。"));
 	}
 
 	private static void RegisterJapanese(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "ja",
 			("tutorial.title", "リアルミニ航空管制"), ("tutorial.qrh", "クイックリファレンス"), ("tutorial.next", "次へ"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "風向を有効化"), ("settings.events", "イベントを有効化"), ("settings.tcas", "TCAS/GPWSを有効化"),
 			("hud.wind", "風向：{0}°"), ("hud.altitudePrefix", "高度："), ("hud.speedPrefix", "速度："),
 			("hud.fuel", "燃料：{0}%"), ("hud.fuelInfinite", "燃料：∞"), ("hud.weight", "機種：{0}"),
@@ -492,14 +496,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "イベント"), ("tutorial.page.events.description", "事故は時々起こります。\n滑走路事故で滑走路が閉鎖されることがあります。\n燃料の少ない航空機は直ちに着陸する必要があります。\nエンジン故障機は直ちに帰投します。\n悪天候は<b><u>低</u></b>・<b><u>中</u></b>空域を制限区域にします。"),
 			("tutorial.page.wind.heading", "風"), ("tutorial.page.wind.description", "風は離着陸性能に影響します。風向は左上に表示されます。\n完全な追い風では復行・離陸中止の確率が高くなります。\n滑走路との角度が90度以下なら確率は0%です。"),
 			("tutorial.page.last.heading", "最後に"), ("tutorial.page.last.description", "\n<b><u>Tab</u></b>でゲーム内テキストを表示・非表示にします。\n衝突前にはTCASが上昇・下降を指示します。\n地形衝突前にはGPWSが上昇を指示します。\n待機エリアのアップグレードを3個所持し、獲得速度が2倍になります。\n画面外へ出た航空機は制限区域違反です。\nウェイポイント設置中に<b><u>Space</u></b>で名前を付けられます。"),
-			("tutorial.page.thanks.heading", "リアルミニ航空管制を遊んでくれてありがとう！"), ("tutorial.page.thanks.description", "詳しくは<b><u><link=\"ENG\">クイックリファレンス</link></u></b>を参照してください。"));
+			("tutorial.page.thanks.heading", "リアルミニ航空管制を遊んでくれてありがとう！"), ("tutorial.page.thanks.description", "詳しくは<b><u><link=\"docs\">クイックリファレンス</link></u></b>を参照してください。\n\n旧版の Mini Realistic Airways MOD に戻したい場合は、こちらから<b><u><link=\"original\">初期バージョン</link></u></b>をダウンロードできます。"));
 	}
 
 	private static void RegisterKorean(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "ko",
 			("tutorial.title", "리얼 미니 항공 관제"), ("tutorial.qrh", "빠른 매뉴얼"), ("tutorial.next", "다음"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "바람 사용"), ("settings.events", "이벤트 사용"), ("settings.tcas", "TCAS/GPWS 사용"),
 			("hud.wind", "바람: {0}°"), ("hud.altitudePrefix", "고도: "), ("hud.speedPrefix", "속도: "),
 			("hud.fuel", "연료: {0}%"), ("hud.fuelInfinite", "연료: ∞"), ("hud.weight", "기종: {0}"),
@@ -512,14 +517,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "이벤트"), ("tutorial.page.events.description", "사고가 발생할 수 있습니다.\n활주로 사고로 활주로가 폐쇄될 수 있습니다.\n연료가 부족한 항공기는 즉시 착륙해야 합니다.\n엔진 고장 항공기는 즉시 귀환해야 합니다.\n악천후는<b><u>저</u></b>·<b><u>중</u></b>고도를 제한 구역으로 만듭니다."),
 			("tutorial.page.wind.heading", "바람"), ("tutorial.page.wind.description", "바람은 이착륙 성능에 영향을 주며 방향은 왼쪽 위에 표시됩니다.\n순풍으로 이착륙하면 복행·이륙 중단 확률이 높습니다.\n활주로와의 각도가 90도 이하이면 확률은 0%입니다."),
 			("tutorial.page.last.heading", "마지막"), ("tutorial.page.last.description", "\n<b><u>Tab</u></b>으로 게임 텍스트를 표시하거나 숨깁니다.\n충돌 전 TCAS가 상승 또는 하강을 지시합니다.\n지형 충돌 전 GPWS가 상승을 지시합니다.\n대기 구역 업그레이드 3개로 시작하며 업그레이드 속도가 2배입니다.\n화면 밖으로 나가면 제한 구역 위반입니다.\n웨이포인트 배치 중 <b><u>Space</u></b>로 이름을 지정합니다."),
-			("tutorial.page.thanks.heading", "리얼 미니 항공 관제를 플레이해 주셔서 감사합니다!"), ("tutorial.page.thanks.description", "자세한 내용은 <b><u><link=\"ENG\">빠른 매뉴얼</link></u></b>을 확인하세요."));
+			("tutorial.page.thanks.heading", "리얼 미니 항공 관제를 플레이해 주셔서 감사합니다!"), ("tutorial.page.thanks.description", "자세한 내용은 <b><u><link=\"docs\">빠른 매뉴얼</link></u></b>을 확인하세요.\n\n이전 Mini Realistic Airways 모드로 돌아가고 싶다면 여기에서 <b><u><link=\"original\">최초 버전</link></u></b>을 다운로드할 수 있습니다."));
 	}
 
 	private static void RegisterArabic(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "ar",
 			("tutorial.title", "المراقبة الجوية المصغرة الواقعية"), ("tutorial.qrh", "الدليل السريع"), ("tutorial.next", "التالي"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "تفعيل الرياح"), ("settings.events", "تفعيل الأحداث"), ("settings.tcas", "تفعيل نظامي TCAS وGPWS"),
 			("hud.wind", "الرياح: {0} درجة"), ("hud.altitudePrefix", "الارتفاع: "), ("hud.speedPrefix", "السرعة: "),
 			("hud.fuel", "الوقود: {0}٪"), ("hud.fuelInfinite", "الوقود: غير محدود"), ("hud.weight", "النوع: {0}"),
@@ -532,14 +538,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "الأحداث"), ("tutorial.page.events.description", "قد تحدث حوادث أحياناً.\nقد يؤدي خروج طائرة عن المدرج إلى إغلاقه.\nقد تحتاج طائرة قليلة الوقود إلى الهبوط فوراً.\nتحتاج الطائرة المتعطلة المحرك إلى العودة فوراً.\nقد يحول الطقس السيئ المجالين <b><u>المنخفض</u></b> و<b><u>المتوسط</u></b> إلى منطقة محظورة."),
 			("tutorial.page.wind.heading", "الرياح"), ("tutorial.page.wind.description", "تؤثر الرياح في أداء الإقلاع والهبوط، ويظهر اتجاهها أعلى اليسار.\nيزداد احتمال الدوران أو إلغاء الإقلاع مع الرياح الخلفية الكاملة.\nيصبح الاحتمال 0٪ عندما تكون الزاوية مع المدرج 90 درجة أو أقل."),
 			("tutorial.page.last.heading", "أخيراً"), ("tutorial.page.last.description", "\nاستخدم لوحة المفاتيح لإظهار نصوص اللعبة أو إخفائها.\nيأمر نظام تجنب التصادم الطائرات بالصعود أو الهبوط قبل التصادم.\nيأمر نظام التحذير من التضاريس بالصعود قبل الاصطدام بها.\nتبدأ بثلاث ترقيات لمنطقة الانتظار وتتضاعف سرعة الترقيات.\nالخروج من حدود الشاشة يُعد مخالفة لمنطقة محظورة.\nاستخدم لوحة المفاتيح أثناء وضع نقطة الطريق لتسميتها."),
-			("tutorial.page.thanks.heading", "شكراً للعبك المراقبة الجوية المصغرة الواقعية!"), ("tutorial.page.thanks.description", "لمزيد من المعلومات راجع <b><u><link=\"ENG\">الدليل السريع</link></u></b>."));
+			("tutorial.page.thanks.heading", "شكراً للعبك المراقبة الجوية المصغرة الواقعية!"), ("tutorial.page.thanks.description", "لمزيد من المعلومات راجع <b><u><link=\"docs\">الدليل السريع</link></u></b>.\n\nإذا أردت العودة إلى النسخة القديمة من تعديل التحكم الجوي الواقعي، يمكنك تنزيل <b><u><link=\"original\">النسخة الأصلية</link></u></b> من هنا."));
 	}
 
 	private static void RegisterDutch(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "nl",
 			("tutorial.title", "Mini Realistische Luchtverkeersleiding"), ("tutorial.qrh", "Snelle handleiding"), ("tutorial.next", "Volgende"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Wind inschakelen"), ("settings.events", "Gebeurtenissen inschakelen"), ("settings.tcas", "TCAS & GPWS inschakelen"),
 			("hud.wind", "Wind: {0}°"), ("hud.altitudePrefix", "Hoogte: "), ("hud.speedPrefix", "Snelheid: "),
 			("hud.fuel", "Brandstof: {0}%"), ("hud.fuelInfinite", "Brandstof: ∞"), ("hud.weight", "Type: {0}"),
@@ -552,14 +559,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Gebeurtenissen"), ("tutorial.page.events.description", "Soms gebeuren er ongelukken.\nEen runway-excursie kan een baan sluiten.\nEen vliegtuig met weinig brandstof moet soms direct landen.\nEen motorstoring vereist een onmiddellijke terugkeer.\nSlecht weer maakt <b><u>lage</u></b> en <b><u>normale</u></b> lucht verboden."),
 			("tutorial.page.wind.heading", "Wind"), ("tutorial.page.wind.description", "Wind beïnvloedt opstijgen en landen; de richting staat linksboven.\nBij volledige rugwind is de kans op doorstart of afgebroken start groot.\nBij een hoek van maximaal 90 graden met de baan is die kans 0%."),
 			("tutorial.page.last.heading", "Tot slot"), ("tutorial.page.last.description", "\nGebruik <b><u>Tab</u></b> om speltekst te tonen of verbergen.\nTCAS laat vliegtuigen klimmen of dalen voor een botsing.\nGPWS laat ze klimmen voor terrein.\nJe start met 3 wachtgebied-upgrades en upgrades komen tweemaal zo snel.\nBuiten beeld vliegen telt als overtreding.\nGebruik <b><u>Space</u></b> bij het plaatsen van een waypoint om het te benoemen."),
-			("tutorial.page.thanks.heading", "Bedankt voor het spelen van Mini Realistische Luchtverkeersleiding!"), ("tutorial.page.thanks.description", "Meer informatie staat in de <b><u><link=\"ENG\">snelle handleiding</link></u></b>."));
+			("tutorial.page.thanks.heading", "Bedankt voor het spelen van Mini Realistische Luchtverkeersleiding!"), ("tutorial.page.thanks.description", "Meer informatie staat in de <b><u><link=\"docs\">snelle handleiding</link></u></b>.\n\nAls je wilt teruggaan naar de oudere Mini Realistic Airways-mod, kun je hier de <b><u><link=\"original\">oorspronkelijke versie</link></u></b> downloaden."));
 	}
 
 	private static void RegisterFrench(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "fr",
 			("tutorial.title", "Mini contrôle aérien réaliste"), ("tutorial.qrh", "Guide rapide"), ("tutorial.next", "Suivant"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Activer le vent"), ("settings.events", "Activer les événements"), ("settings.tcas", "Activer TCAS et GPWS"),
 			("hud.wind", "Vent : {0}°"), ("hud.altitudePrefix", "ALT : "), ("hud.speedPrefix", "VIT : "),
 			("hud.fuel", "Carburant : {0}%"), ("hud.fuelInfinite", "Carburant : ∞"), ("hud.weight", "Type : {0}"),
@@ -572,14 +580,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Événements"), ("tutorial.page.events.description", "Des accidents peuvent arriver.\nUne sortie de piste peut fermer une piste.\nUn avion à court de carburant peut devoir atterrir immédiatement.\nUne panne moteur exige un retour immédiat.\nLa météo peut transformer les espaces <b><u>bas</u></b> et <b><u>normaux</u></b> en zone interdite."),
 			("tutorial.page.wind.heading", "Vent"), ("tutorial.page.wind.description", "Le vent influence les performances au décollage et à l'atterrissage. Sa direction est affichée en haut à gauche.\nAvec un vent arrière complet, la probabilité de remise des gaz ou d'interruption du décollage est élevée.\nElle tombe à 0 % lorsque l'angle avec la piste est inférieur ou égal à 90 degrés."),
 			("tutorial.page.last.heading", "Dernier rappel"), ("tutorial.page.last.description", "\nUtilisez <b><u>Tab</u></b> pour afficher ou masquer les textes.\nLe TCAS ordonne de monter ou descendre avant une collision.\nLe GPWS ordonne de monter avant un impact avec le relief.\nVous commencez avec 3 améliorations de zone d'attente, obtenues deux fois plus vite.\nSortir des limites compte comme une infraction de zone interdite.\nAppuyez sur <b><u>Espace</u></b> pour nommer un waypoint."),
-			("tutorial.page.thanks.heading", "Merci d'avoir joué à Mini contrôle aérien réaliste !"), ("tutorial.page.thanks.description", "Pour plus d'informations, consultez le <b><u><link=\"ENG\">guide rapide</link></u></b>."));
+			("tutorial.page.thanks.heading", "Merci d'avoir joué à Mini contrôle aérien réaliste !"), ("tutorial.page.thanks.description", "Pour plus d'informations, consultez le <b><u><link=\"docs\">guide rapide</link></u></b>.\n\nSi vous souhaitez revenir à l’ancien mod Mini Realistic Airways, vous pouvez télécharger ici la <b><u><link=\"original\">version d’origine</link></u></b>."));
 	}
 
 	private static void RegisterGerman(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "de",
 			("tutorial.title", "Mini Realistische Flugverkehrskontrolle"), ("tutorial.qrh", "Kurzanleitung"), ("tutorial.next", "Weiter"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Wind aktivieren"), ("settings.events", "Ereignisse aktivieren"), ("settings.tcas", "TCAS & GPWS aktivieren"),
 			("hud.wind", "Wind: {0}°"), ("hud.altitudePrefix", "HÖHE: "), ("hud.speedPrefix", "GESCHW: "),
 			("hud.fuel", "Treibstoff: {0}%"), ("hud.fuelInfinite", "Treibstoff: ∞"), ("hud.weight", "Typ: {0}"),
@@ -592,14 +601,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Ereignisse"), ("tutorial.page.events.description", "Manchmal passieren Unfälle.\nEin Ausflug von der Startbahn kann sie schließen.\nFlugzeuge mit wenig Treibstoff müssen eventuell sofort landen.\nBei Triebwerksausfall ist eine sofortige Rückkehr nötig.\nWetter kann niedrige und normale Lufträume zu Sperrgebieten machen."),
 			("tutorial.page.wind.heading", "Wind"), ("tutorial.page.wind.description", "Wind beeinflusst Start und Landung; seine Richtung steht oben links.\nBei vollständigem Rückenwind ist die Wahrscheinlichkeit für Durchstarten oder Startabbruch hoch.\nBei höchstens 90 Grad zur Bahn beträgt sie 0 %."),
 			("tutorial.page.last.heading", "Zum Schluss"), ("tutorial.page.last.description", "\nMit <b><u>Tab</u></b> blendest du Spieltexte ein oder aus.\nTCAS lässt Flugzeuge vor einer Kollision steigen oder sinken.\nGPWS lässt sie vor Geländekontakt steigen.\nDu startest mit 3 Wartebereich-Upgrades, die doppelt so schnell kommen.\nAußerhalb der Grenzen zählt als Sperrgebietsverletzung.\nMit <b><u>Leertaste</u></b> benennst du einen Wegpunkt."),
-			("tutorial.page.thanks.heading", "Danke fürs Spielen von Mini Realistische Flugverkehrskontrolle!"), ("tutorial.page.thanks.description", "Weitere Informationen findest du in der <b><u><link=\"ENG\">Kurzanleitung</link></u></b>."));
+			("tutorial.page.thanks.heading", "Danke fürs Spielen von Mini Realistische Flugverkehrskontrolle!"), ("tutorial.page.thanks.description", "Weitere Informationen findest du in der <b><u><link=\"docs\">Kurzanleitung</link></u></b>.\n\nWenn du zur älteren Mini Realistic Airways-Mod zurückkehren möchtest, kannst du hier die <b><u><link=\"original\">ursprüngliche Version</link></u></b> herunterladen."));
 	}
 
 	private static void RegisterPolish(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "pl",
 			("tutorial.title", "Mini Realistyczna Kontrola Ruchu Lotniczego"), ("tutorial.qrh", "Szybki podręcznik"), ("tutorial.next", "Dalej"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Włącz wiatr"), ("settings.events", "Włącz zdarzenia"), ("settings.tcas", "Włącz TCAS i GPWS"),
 			("hud.wind", "Wiatr: {0}°"), ("hud.altitudePrefix", "WYS: "), ("hud.speedPrefix", "PRĘD: "),
 			("hud.fuel", "Paliwo: {0}%"), ("hud.fuelInfinite", "Paliwo: ∞"), ("hud.weight", "Typ: {0}"),
@@ -612,14 +622,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Zdarzenia"), ("tutorial.page.events.description", "Czasem zdarzają się wypadki.\nWypadnięcie z pasa może go zamknąć.\nSamolot z małą ilością paliwa może wymagać natychmiastowego lądowania.\nAwaria silnika wymaga natychmiastowego powrotu.\nPogoda może zamienić niską i normalną przestrzeń w strefę zakazaną."),
 			("tutorial.page.wind.heading", "Wiatr"), ("tutorial.page.wind.description", "Wiatr wpływa na start i lądowanie; kierunek jest w lewym górnym rogu.\nPrzy pełnym wietrze tylnym prawdopodobieństwo odejścia lub przerwania startu jest wysokie.\nPrzy kącie do pasa nie większym niż 90 stopni wynosi 0%."),
 			("tutorial.page.last.heading", "Na koniec"), ("tutorial.page.last.description", "\n<b><u>Tab</u></b> pokazuje lub ukrywa tekst gry.\nTCAS nakazuje wznoszenie lub zniżanie przed kolizją.\nGPWS nakazuje wznoszenie przed zderzeniem z terenem.\nZaczynasz z 3 ulepszeniami strefy oczekiwania, zdobywanymi dwa razy szybciej.\nWylot poza granice to naruszenie strefy zakazanej.\nNaciśnij <b><u>Spację</u></b>, aby nazwać punkt."),
-			("tutorial.page.thanks.heading", "Dziękujemy za grę w Mini Realistyczną Kontrolę Ruchu Lotniczego!"), ("tutorial.page.thanks.description", "Więcej informacji znajdziesz w <b><u><link=\"ENG\">szybkim podręczniku</link></u></b>."));
+			("tutorial.page.thanks.heading", "Dziękujemy za grę w Mini Realistyczną Kontrolę Ruchu Lotniczego!"), ("tutorial.page.thanks.description", "Więcej informacji znajdziesz w <b><u><link=\"docs\">szybkim podręczniku</link></u></b>.\n\nJeśli chcesz wrócić do starszego moda Mini Realistic Airways, możesz tutaj pobrać <b><u><link=\"original\">pierwotną wersję</link></u></b>."));
 	}
 
 	private static void RegisterPortuguese(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "pt",
 			("tutorial.title", "Mini Controle de Tráfego Aéreo Realista"), ("tutorial.qrh", "Manual rápido"), ("tutorial.next", "Próximo"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Ativar vento"), ("settings.events", "Ativar eventos"), ("settings.tcas", "Ativar TCAS e GPWS"),
 			("hud.wind", "Vento: {0}°"), ("hud.altitudePrefix", "ALT: "), ("hud.speedPrefix", "VEL: "),
 			("hud.fuel", "Combustível: {0}%"), ("hud.fuelInfinite", "Combustível: ∞"), ("hud.weight", "Tipo: {0}"),
@@ -632,14 +643,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Eventos"), ("tutorial.page.events.description", "Às vezes acidentes acontecem.\nUma saída de pista pode fechá-la.\nUma aeronave com pouco combustível pode precisar pousar imediatamente.\nUma falha de motor exige retorno imediato.\nO clima pode transformar os espaços baixos e normais em área restrita."),
 			("tutorial.page.wind.heading", "Vento"), ("tutorial.page.wind.description", "O vento afeta a decolagem e o pouso; sua direção aparece no canto superior esquerdo.\nCom vento de cauda total, a chance de arremetida ou rejeição de decolagem é alta.\nEla cai para 0% quando o ângulo com a pista é de até 90 graus."),
 			("tutorial.page.last.heading", "Por fim"), ("tutorial.page.last.description", "\nUse <b><u>Tab</u></b> para mostrar ou ocultar textos.\nO TCAS ordena subir ou descer antes de uma colisão.\nO GPWS ordena subir antes do impacto com o terreno.\nVocê começa com 3 melhorias da área de espera, obtidas duas vezes mais rápido.\nSair dos limites conta como infração de área restrita.\nPressione <b><u>Espaço</u></b> para nomear um ponto."),
-			("tutorial.page.thanks.heading", "Obrigado por jogar Mini Controle de Tráfego Aéreo Realista!"), ("tutorial.page.thanks.description", "Para mais informações, consulte o <b><u><link=\"ENG\">manual rápido</link></u></b>."));
+			("tutorial.page.thanks.heading", "Obrigado por jogar Mini Controle de Tráfego Aéreo Realista!"), ("tutorial.page.thanks.description", "Para mais informações, consulte o <b><u><link=\"docs\">manual rápido</link></u></b>.\n\nSe quiser voltar ao mod antigo Mini Realistic Airways, você pode baixar a <b><u><link=\"original\">versão original</link></u></b> aqui."));
 	}
 
 	private static void RegisterRussian(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "ru",
 			("tutorial.title", "Мини-реалистичный авиадиспетчер"), ("tutorial.qrh", "Краткое руководство"), ("tutorial.next", "Далее"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Включить ветер"), ("settings.events", "Включить события"), ("settings.tcas", "Включить TCAS и GPWS"),
 			("hud.wind", "Ветер: {0}°"), ("hud.altitudePrefix", "ВЫС: "), ("hud.speedPrefix", "СКОР: "),
 			("hud.fuel", "Топливо: {0}%"), ("hud.fuelInfinite", "Топливо: ∞"), ("hud.weight", "Тип: {0}"),
@@ -652,14 +664,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "События"), ("tutorial.page.events.description", "Иногда происходят аварии.\nВыкатывание с полосы может закрыть её.\nСамолёту с малым запасом топлива может потребоваться немедленная посадка.\nОтказ двигателя требует немедленного возврата.\nПогода может превратить низкое и обычное воздушное пространство в запретную зону."),
 			("tutorial.page.wind.heading", "Ветер"), ("tutorial.page.wind.description", "Ветер влияет на взлёт и посадку; направление показано слева вверху.\nПри полном попутном ветре вероятность ухода на второй круг или прекращения взлёта высока.\nПри угле к полосе не более 90 градусов она равна 0%."),
 			("tutorial.page.last.heading", "Напоследок"), ("tutorial.page.last.description", "\n<b><u>Tab</u></b> показывает или скрывает текст игры.\nTCAS даёт команду набрать или снизить высоту перед столкновением.\nGPWS даёт команду набрать высоту перед столкновением с рельефом.\nВ начале доступно 3 улучшения зоны ожидания, они приходят вдвое быстрее.\nВылет за границы считается нарушением запретной зоны.\nНажмите <b><u>Пробел</u></b>, чтобы назвать точку."),
-			("tutorial.page.thanks.heading", "Спасибо за игру в Мини-реалистичный авиадиспетчер!"), ("tutorial.page.thanks.description", "Подробнее см. в <b><u><link=\"ENG\">кратком руководстве</link></u></b>."));
+			("tutorial.page.thanks.heading", "Спасибо за игру в Мини-реалистичный авиадиспетчер!"), ("tutorial.page.thanks.description", "Подробнее см. в <b><u><link=\"docs\">кратком руководстве</link></u></b>.\n\nЕсли вы хотите вернуться к старому моду Mini Realistic Airways, здесь можно скачать <b><u><link=\"original\">первоначальную версию</link></u></b>."));
 	}
 
 	private static void RegisterSpanish(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "es",
 			("tutorial.title", "Mini Control Aéreo Realista"), ("tutorial.qrh", "Guía rápida"), ("tutorial.next", "Siguiente"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Activar viento"), ("settings.events", "Activar eventos"), ("settings.tcas", "Activar TCAS y GPWS"),
 			("hud.wind", "Viento: {0}°"), ("hud.altitudePrefix", "ALT: "), ("hud.speedPrefix", "VEL: "),
 			("hud.fuel", "Combustible: {0}%"), ("hud.fuelInfinite", "Combustible: ∞"), ("hud.weight", "Tipo: {0}"),
@@ -672,14 +685,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Eventos"), ("tutorial.page.events.description", "A veces ocurren accidentes.\nUna salida de pista puede cerrarla.\nUn avión con poco combustible puede necesitar aterrizar de inmediato.\nUn fallo de motor exige volver inmediatamente.\nEl tiempo puede convertir los espacios bajos y normales en zona restringida."),
 			("tutorial.page.wind.heading", "Viento"), ("tutorial.page.wind.description", "El viento afecta al despegue y aterrizaje; su dirección aparece arriba a la izquierda.\nCon viento de cola completo, la probabilidad de frustrada o despegue abortado es alta.\nBaja al 0% cuando el ángulo con la pista es de 90 grados o menos."),
 			("tutorial.page.last.heading", "Por último"), ("tutorial.page.last.description", "\nUsa <b><u>Tab</u></b> para mostrar u ocultar el texto.\nTCAS ordena subir o bajar antes de una colisión.\nGPWS ordena subir antes de impactar con el terreno.\nEmpiezas con 3 mejoras del área de espera, que llegan el doble de rápido.\nSalir de los límites cuenta como infracción.\nPulsa <b><u>Espacio</u></b> para nombrar un punto."),
-			("tutorial.page.thanks.heading", "¡Gracias por jugar a Mini Control Aéreo Realista!"), ("tutorial.page.thanks.description", "Para más información, consulta la <b><u><link=\"ENG\">guía rápida</link></u></b>."));
+			("tutorial.page.thanks.heading", "¡Gracias por jugar a Mini Control Aéreo Realista!"), ("tutorial.page.thanks.description", "Para más información, consulta la <b><u><link=\"docs\">guía rápida</link></u></b>.\n\nSi quieres volver al mod antiguo de Mini Realistic Airways, puedes descargar aquí la <b><u><link=\"original\">versión original</link></u></b>."));
 	}
 
 	private static void RegisterTurkish(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "tr",
 			("tutorial.title", "Mini Gerçekçi Hava Trafik Kontrolü"), ("tutorial.qrh", "Hızlı başvuru"), ("tutorial.next", "İleri"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Rüzgârı etkinleştir"), ("settings.events", "Olayları etkinleştir"), ("settings.tcas", "TCAS ve GPWS'ı etkinleştir"),
 			("hud.wind", "Rüzgâr: {0}°"), ("hud.altitudePrefix", "İRT: "), ("hud.speedPrefix", "HIZ: "),
 			("hud.fuel", "Yakıt: %{0}"), ("hud.fuelInfinite", "Yakıt: ∞"), ("hud.weight", "Tip: {0}"),
@@ -692,14 +706,15 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Olaylar"), ("tutorial.page.events.description", "Bazen kazalar olur.\nPistten çıkma pisti kapatabilir.\nYakıtı az olan uçak hemen inmek zorunda kalabilir.\nMotor arızası acil dönüş gerektirir.\nHava durumu alçak ve normal hava sahasını kısıtlı bölgeye çevirebilir."),
 			("tutorial.page.wind.heading", "Rüzgâr"), ("tutorial.page.wind.description", "Rüzgâr kalkış ve inişi etkiler; yönü sol üstte görünür.\nTam kuyruk rüzgârında pas geçme veya kalkış iptali olasılığı yüksektir.\nPist ile açı 90 derece veya altındaysa olasılık %0'dır."),
 			("tutorial.page.last.heading", "Son olarak"), ("tutorial.page.last.description", "\n<b><u>Tab</u></b> ile oyun metnini gösterip gizleyebilirsin.\nTCAS çarpışmadan önce yükselme veya alçalma emri verir.\nGPWS arazi çarpışmasından önce yükselme emri verir.\n3 bekleme alanı yükseltmesiyle başlarsın ve yükseltmeler iki kat hızlı gelir.\nSınır dışına çıkmak kısıtlı bölge ihlalidir.\nBir noktayı adlandırmak için yerleştirirken <b><u>Boşluk</u></b>'a bas."),
-			("tutorial.page.thanks.heading", "Mini Gerçekçi Hava Trafik Kontrolü'nü oynadığın için teşekkürler!"), ("tutorial.page.thanks.description", "Daha fazla bilgi için <b><u><link=\"ENG\">hızlı başvuruya</link></u></b> bak."));
+			("tutorial.page.thanks.heading", "Mini Gerçekçi Hava Trafik Kontrolü'nü oynadığın için teşekkürler!"), ("tutorial.page.thanks.description", "Daha fazla bilgi için <b><u><link=\"docs\">hızlı başvuruya</link></u></b> bak.\n\nMini Realistic Airways modunun eski sürümüne dönmek isterseniz <b><u><link=\"original\">ilk sürümü</link></u></b> buradan indirebilirsiniz."));
 	}
 
 	private static void RegisterUkrainian(Dictionary<string, Dictionary<string, string>> c)
 	{
 		RegisterLocale(c, "uk",
 			("tutorial.title", "Міні-реалістичне керування повітряним рухом"), ("tutorial.qrh", "Короткий довідник"), ("tutorial.next", "Далі"),
-			("tutorial.docsUrl", "https://github.com/ericpzh/MiniRealisticAirways?tab=readme-ov-file#mini-realistic-airways"),
+			("tutorial.docsUrl", "https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual"),
+			("tutorial.originalUrl", "https://github.com/ericpzh/MiniRealisticAirways"),
 			("settings.wind", "Увімкнути вітер"), ("settings.events", "Увімкнути події"), ("settings.tcas", "Увімкнути TCAS і GPWS"),
 			("hud.wind", "Вітер: {0}°"), ("hud.altitudePrefix", "ВИС: "), ("hud.speedPrefix", "ШВИД: "),
 			("hud.fuel", "Пальне: {0}%"), ("hud.fuelInfinite", "Пальне: ∞"), ("hud.weight", "Тип: {0}"),
@@ -712,6 +727,6 @@ internal static partial class ModLocalization
 			("tutorial.page.events.heading", "Події"), ("tutorial.page.events.description", "Іноді трапляються аварії.\nВикочування зі смуги може закрити її.\nЛітаку з малим запасом пального може знадобитися негайна посадка.\nВідмова двигуна вимагає негайного повернення.\nПогода може перетворити низький і нормальний простір на заборонену зону."),
 			("tutorial.page.wind.heading", "Вітер"), ("tutorial.page.wind.description", "Вітер впливає на зліт і посадку; напрямок показано вгорі ліворуч.\nЗа повного попутного вітру ймовірність відходу на друге коло або припинення зльоту висока.\nЗа кута до смуги не більшого за 90 градусів вона дорівнює 0%."),
 			("tutorial.page.last.heading", "Наостанок"), ("tutorial.page.last.description", "\n<b><u>Tab</u></b> показує або ховає текст гри.\nTCAS наказує набрати або знизити висоту перед зіткненням.\nGPWS наказує набрати висоту перед ударом об рельєф.\nНа початку є 3 покращення зони очікування, що надходять удвічі швидше.\nВиліт за межі є порушенням забороненої зони.\nНатисніть <b><u>Пробіл</u></b>, щоб назвати точку."),
-			("tutorial.page.thanks.heading", "Дякуємо за гру в Міні-реалістичне керування повітряним рухом!"), ("tutorial.page.thanks.description", "Докладніше дивіться в <b><u><link=\"ENG\">короткому довіднику</link></u></b>."));
+			("tutorial.page.thanks.heading", "Дякуємо за гру в Міні-реалістичне керування повітряним рухом!"), ("tutorial.page.thanks.description", "Докладніше дивіться в <b><u><link=\"docs\">короткому довіднику</link></u></b>.\n\nЯкщо ви хочете повернутися до старого мода Mini Realistic Airways, тут можна завантажити <b><u><link=\"original\">початкову версію</link></u></b>."));
 	}
 }

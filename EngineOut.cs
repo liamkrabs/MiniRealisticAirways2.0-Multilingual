@@ -211,7 +211,7 @@ public class EngineOut : Event
 		}
 		catch (System.Exception exception)
 		{
-			Plugin.Log?.LogDebug("Engine-out dialogue line metric was unavailable: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Engine-out dialogue line metric was unavailable: " + exception.GetBaseException().Message);
 		}
 		return 0f;
 	}

@@ -170,7 +170,7 @@ public static class Settings
 		if (ready && setupLoggedRoot_ != setupRoot_)
 		{
 			setupLoggedRoot_ = setupRoot_;
-			Plugin.Log?.LogInfo("MiniRealisticAirways settings controls initialized and locale-bound.");
+			Plugin.LogDebug("MiniRealisticAirways settings controls initialized and locale-bound.");
 		}
 		return ready;
 	}
@@ -364,7 +364,7 @@ public static class Settings
 		}
 		catch (Exception exception)
 		{
-			Plugin.Log?.LogDebug("Settings label layout deferred until the locale font is ready: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Settings label layout deferred until the locale font is ready: " + exception.GetBaseException().Message);
 		}
 	}
 

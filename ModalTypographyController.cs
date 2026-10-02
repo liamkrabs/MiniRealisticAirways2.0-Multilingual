@@ -246,12 +246,12 @@ internal sealed class ModalTypographyController : MonoBehaviour
 			{
 				lastTitleAppliedRevision_ = ModLocalization.Revision;
 				lastTitleAppliedText_ = title_.text;
-				Plugin.Log?.LogInfo("QRH title spacing applied: locale=" + ModLocalization.CurrentLocaleCode + ", node=" + title_.name + ", lines=" + lineCount + ", baseline=" + baseDistance.ToString("0.###") + ", target=" + targetDistance.ToString("0.###") + ", lineSpacing=" + title_.lineSpacing.ToString("0.###"));
+				Plugin.LogDebug("QRH title spacing applied: locale=" + ModLocalization.CurrentLocaleCode + ", node=" + title_.name + ", lines=" + lineCount + ", baseline=" + baseDistance.ToString("0.###") + ", target=" + targetDistance.ToString("0.###") + ", lineSpacing=" + title_.lineSpacing.ToString("0.###"));
 			}
 		}
 		catch (System.Exception exception)
 		{
-			Plugin.Log?.LogDebug("Modal title line spacing update deferred: " + exception.GetBaseException().Message);
+			Plugin.LogDebug("Modal title line spacing update deferred: " + exception.GetBaseException().Message);
 		}
 	}
 

@@ -40,7 +40,7 @@ public static class WeatherCellTextures
 			return;
 		}
 		DestroyTextures();
-		Plugin.Log?.LogInfo("Pre-rendered weather cell textures.");
+		Plugin.LogDebug("Pre-rendered weather cell textures.");
 		colors_ = new List<Color>
 		{
 			new Color(1f, 0f, 0f, 0.1f),
@@ -89,7 +89,7 @@ public static class WeatherCellTextures
 		{
 			return;
 		}
-		Plugin.Log?.LogInfo("Weather cell textures destroyed.");
+		Plugin.LogDebug("Weather cell textures destroyed.");
 		if (sprites_ != null)
 		{
 			foreach (List<Sprite> sprites in sprites_)

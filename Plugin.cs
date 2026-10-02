@@ -12,6 +12,10 @@ public class Plugin : BaseUnityPlugin
 {
 	internal static ManualLogSource Log;
 
+	// Release builds omit diagnostics and their message construction entirely.
+	[System.Diagnostics.Conditional("DEBUG")]
+	internal static void LogDebug(string message) => Log?.LogDebug(message);
+
 	internal static bool showText_ = true;
 
 	internal static WindSock windsock_;
@@ -53,7 +57,7 @@ public class Plugin : BaseUnityPlugin
 		// best-effort pass immediately; authoritative game Start/Update patches
 		// retry when their objects are actually ready.
 		InitializeScene(SceneManager.GetActiveScene(), LoadSceneMode.Single);
-		Log.LogInfo("Initial scene bootstrap completed.");
+		LogDebug("Initial scene bootstrap completed.");
 	}
 
 	private static void InstallSceneHook()
@@ -70,7 +74,7 @@ public class Plugin : BaseUnityPlugin
 	{
 		if (harmonyInstalled_)
 		{
-			Log.LogDebug("Harmony patches were already installed; retaining the process-lifetime patch set.");
+			LogDebug("Harmony patches were already installed; retaining the process-lifetime patch set.");
 			return;
 		}
 		try
@@ -78,7 +82,7 @@ public class Plugin : BaseUnityPlugin
 			harmony_ = new Harmony(PluginInfo.PLUGIN_GUID);
 			harmony_.PatchAll();
 			harmonyInstalled_ = true;
-			Log.LogInfo("Harmony patches installed.");
+			LogDebug("Harmony patches installed.");
 		}
 		catch (Exception exception)
 		{
@@ -91,7 +95,7 @@ public class Plugin : BaseUnityPlugin
 		try
 		{
 			Settings.ProcessLaunchOptions();
-			Log?.LogInfo("Launch options processed.");
+			LogDebug("Launch options processed.");
 		}
 		catch (Exception exception)
 		{
@@ -118,7 +122,7 @@ public class Plugin : BaseUnityPlugin
 		{
 			ResetSceneState();
 		}
-		Log?.LogInfo("Scene loaded: " + scene.name);
+		LogDebug("Scene loaded: " + scene.name);
 		if (scene.name == "Menu")
 		{
 			// MainMenuManager.Start is the normal path. This scene-load pass handles
@@ -214,7 +218,7 @@ public class Plugin : BaseUnityPlugin
 				escButton.AddComponent<TextVisibilityHotkey>();
 			}
 			mapServicesRoot_ = escButton;
-			Log?.LogInfo("Map services initialized from " + escButton.name + ".");
+			LogDebug("Map services initialized from " + escButton.name + ".");
 			return true;
 		}
 		catch (Exception exception)

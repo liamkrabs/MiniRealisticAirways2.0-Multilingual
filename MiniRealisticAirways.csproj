@@ -11,12 +11,15 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>12.0</LangVersion>
     <Deterministic>true</Deterministic>
+    <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
+    <DebugSymbols Condition="'$(Configuration)' == 'Release'">false</DebugSymbols>
     <PathMap>$(MSBuildProjectDirectory)=/_/MiniRealisticAirways</PathMap>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="*.cs" />
+    <EmbeddedResource Include="img/fuel-icon.png" LogicalName="MiniRealisticAirways.assets.fuel-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +47,9 @@
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(ReferenceDirectory)/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(ReferenceDirectory)/UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>$(ReferenceDirectory)/UnityEngine.UI.dll</HintPath>
