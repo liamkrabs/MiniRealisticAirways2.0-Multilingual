@@ -74,11 +74,9 @@ internal class PatchFixedUpdate
 			}
 			if (__instance.state != Aircraft.State.Landing && aircraftAltitude_.tcasAction_ == TCASAction.None)
 			{
-				for (int i = (int)aircraftAltitude_.targetAltitude_; i < (int)AltitudeLevel.High; i++)
-				{
-					aircraftAltitude_.EmergencyClimb();
-				}
-				Plugin.Log.LogInfo("Weather effected, emergency climbing.");
+				AltitudeLevel previousTarget = aircraftAltitude_.targetAltitude_;
+				aircraftAltitude_.EmergencySetTargetAltitude(AltitudeLevel.High);
+				if (previousTarget != aircraftAltitude_.targetAltitude_) Plugin.Log.LogInfo("Weather effected, emergency climbing.");
 			}
 		}
 		return true;

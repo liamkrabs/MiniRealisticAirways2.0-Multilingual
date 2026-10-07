@@ -121,10 +121,7 @@ internal class PatchOnTriggerStay2D
 			if (flag && aircraftAltitude3.targetAltitude_ < AltitudeLevel.High)
 			{
 				AltitudeLevel previousTarget = aircraftAltitude3.targetAltitude_;
-			for (int i = (int)aircraftAltitude3.targetAltitude_; i < (int)AltitudeLevel.High; i++)
-				{
-					aircraftAltitude3.EmergencyClimb(priority: true);
-				}
+			aircraftAltitude3.EmergencySetTargetAltitude(AltitudeLevel.High, priority: true);
 				if (previousTarget == aircraftAltitude3.targetAltitude_) return true;
 				Plugin.Log.LogInfo("GPWS activated, emergency climbing.");
 				if (__instance.aircraftVoiceAndSubtitles != null)

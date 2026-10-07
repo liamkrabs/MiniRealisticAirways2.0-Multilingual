@@ -3,11 +3,11 @@ using UnityEngine.Rendering;
 
 namespace MiniRealisticAirways;
 
-// Treat the navigation symbol and every child HUD as one foreground object.
-// Separate Text/1 child groups otherwise tie newly spawned destination labels.
+// Keep the complete waypoint above destination labels, below every aircraft.
+// Its configured altitude is a command, not a visual depth.
 internal sealed class WaypointVisualPriority : MonoBehaviour
 {
-    internal const int NavigationOrder = 32767;
+    internal const int NavigationOrder = FlightVisualOrder.Navigation;
     private SortingGroup group;
 
     internal static void Attach(PlaceableWaypoint waypoint)
@@ -20,7 +20,7 @@ internal sealed class WaypointVisualPriority : MonoBehaviour
     private void EnsurePriority()
     {
         if (group == null) group = GetComponent<SortingGroup>() ?? gameObject.AddComponent<SortingGroup>();
-        if (group.sortingLayerName != "Text") group.sortingLayerName = "Text";
+        if (group.sortingLayerName != FlightVisualOrder.LayerName) group.sortingLayerName = FlightVisualOrder.LayerName;
         if (group.sortingOrder != NavigationOrder) group.sortingOrder = NavigationOrder;
         group.sortAtRoot = true;
     }

@@ -4,27 +4,19 @@
 
 This is a mini yet realistic air traffic control mod for Mini Airways.
 
-# v2.0.3 Update
+# v2.0 Code Changes
 
-[Download MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll) · [Release notes](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/tag/v2.0.3)
-
-- **Fuel:** Replaces the droplet gauge with a fuel-can icon while retaining fuel-level shading and low-fuel blinking.
-- **Waypoints:** Improves the display priority of navigation waypoints and their attached information, reducing overlap with other map elements.
-- **QRH:** Updates the final-page handbook link to this multilingual repository and adds a separate original-mod download link, with text in all 15 supported languages.
-- **Other:** Bug fixes and stability improvements.
-
-# v2.0 Code Changes (Compared with the Original Version)
-
-- **Multilingual support:** Adds built-in localization for English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Arabic, Dutch, French, German, Polish, Portuguese, Russian, Spanish, Turkish, and Ukrainian. The tutorial, QRH, settings toggles, aircraft/waypoint HUD, wind-direction text, fuel/aircraft-type text, and engine failure dialogue follow the game language and can be switched without restarting.
-- **Altitude-layer display sorting:** Adds a visual sorting controller that determines aircraft occlusion based on altitude and render order, fixing cases where text was obscured by runways or mountains.
-- **Gameplay adjustment:** Waypoints can now be renamed during placement, while the game is running, and while paused.
-- **Art replacements:** Replaces the wind indicator with a more attractive solid arrow; uses shared solid blocks for altitude/speed levels in the aircraft and waypoint HUD; and rearranges parts of the UI for a cleaner appearance.
-- **Other optimizations and refactoring:** Improves the code structure, rewrites and hardens parts of the functionality, splits large files into multiple state components and patches, improves TCAS decision-making, mitigates memory leaks, and more.
+- **Multilingual support:** Supports 15 languages. The tutorial, QRH, settings, aircraft and waypoint information, and emergency dialogue follow the selected game language without requiring a restart.
+- **Altitude command handling:** An aircraft follows one altitude target at a time. While a climb or descent is in progress, repeated commands in the same direction do not stack; an opposite command cancels the previous one and sets a new target relative to the aircraft's current altitude. On reaching a waypoint, the aircraft receives that waypoint's altitude command, which may span two levels and is issued again on each subsequent passage. Altitude commands are ignored on the ground and during takeoff. TCAS/GPWS emergency avoidance retains priority.
+- **Display ordering:** Aircraft, their attached text and gauges, and waypoints use a consistent drawing order. Aircraft are sorted by actual altitude, while all waypoints and their attached information remain behind the complete aircraft visual groups.
+- **Waypoint interaction:** Waypoints can be renamed during placement, while the game is running, and while paused.
+- **Interface and artwork:** A fuel-can icon shows remaining fuel, retaining fuel-level shading and low-fuel blinking. The wind indicator uses a solid arrow, aircraft and waypoint altitude/speed levels use solid blocks, and the related interface layouts have been adjusted.
+- **Code improvements and refactoring:** Splits the original large files into separate components and patches, and improves TCAS conflict assessment, resource management, and runtime stability.
 
 # Installation
 
 - Use the Mini Airways Mono mod branch (`mod_feat`) with BepInEx installed.
-- Quit the game, download [MiniRealisticAirways.dll for v2.0.3](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll), and replace `BepInEx/plugins/MiniRealisticAirways.dll` in your game directory. Keep the old DLL backup outside `plugins`.
+- Quit the game, download [MiniRealisticAirways.dll for v2.0.4](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.4/MiniRealisticAirways.dll), and replace `BepInEx/plugins/MiniRealisticAirways.dll` in your game directory. Keep the old DLL backup outside `plugins`.
 - This GitHub release does not automatically update the version bundled with the Steam branch.
 - If you want to switch back to the older mod, download the [original MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll) and replace the same file.
 
@@ -166,27 +158,19 @@ Sometimes, accidents do happen. These rare events show up on average every 6 day
 
 这是一个既迷你又真实的迷你空管Mod。
 
-# v2.0.3 更新
+# v2.0 代码变化
 
-[下载 MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll) · [版本说明](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/tag/v2.0.3)
-
-- **油料：** 将水滴油量图标替换为油桶图标，保留油量明暗变化和低油量闪烁。
-- **航点：** 提高导航航点及附属信息的显示优先级，减少被其他地图元素遮挡的情况。
-- **QRH：** 最后一页的快速检查单链接改为本多语言仓库，增加独立的最初版本下载入口，说明文字覆盖现有 15 种语言。
-- **其他：** bug 修复与稳定性改进。
-
-# v2.0 代码变化（相对原仓库版本）
-
-- **多语言支持：** 新增内置本地化：英语、简体中文、繁体中文、日语、韩语、阿拉伯语、荷兰语、法语、德语、波兰语、葡萄牙语、俄语、西班牙语、土耳其语和乌克兰语。教程、QRH、设置开关、飞机/航点 HUD、风向文字、燃油/机型文字和引擎故障对白会跟随游戏语言，并支持不重启切换。
-- **高度层显示排序：** 新增了视觉排序控制器，按高度和刷新顺序来决定飞机的遮挡关系，修复了文字被跑道或山区遮挡的问题。
-- **功能调整：** 在放置、运行和暂停状态下均可以重命名航点。
-- **美术替换：** 风向标改为更美观的实心箭头；飞机和航点 HUD 的高度/速度等级使用共用的实心方块表示；重新排布部分UI使之更美观。
-- **其他优化和重构：** 优化代码结构，对其中部分功能进行了重写和加固；将大文件拆分为多个状态组件和补丁；优化了TCAS的智能程度；缓解了内存泄漏的情况等。
+- **多语言支持：** 支持 15 种语言，教程、QRH、设置、飞机及航点信息、特情对白跟随游戏语言切换，无需重启。
+- **高度调度逻辑：** 飞机同时只执行一个高度目标；升降未完成时，同向指令不叠加，反向指令取消旧命令并基于当前高度重新调度。到达航点时接收其设定高度的指令，允许跨两级，重复经过同一航点也会再次生效。地面和起飞阶段不接受高度指令，TCAS／GPWS 紧急避让保留优先级。
+- **显示排序：** 统一管理飞机、附属文字、仪表与航点的遮挡关系。飞机按实际高度排序，所有航点及其附属信息始终显示在飞机整组下方。
+- **航点交互：** 支持在放置、运行和暂停状态下重命名航点。
+- **界面与美术：** 使用油桶图标显示剩余燃油，保留油量变化和低油量闪烁；风向标改为实心箭头，飞机和航点的高度、速度等级使用实心方块，并调整相关界面布局。
+- **代码优化与重构：** 将原有大文件拆分为独立组件和补丁，改进 TCAS 冲突判断、资源管理与运行稳定性。
 
 # 安装
 
 - 使用已配置 BepInEx 的 Mini Airways Mono mod 分支（`mod_feat`）。
-- 退出游戏，下载 [v2.0.3 的 MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.3/MiniRealisticAirways.dll)，替换游戏目录中的 `BepInEx/plugins/MiniRealisticAirways.dll`。旧 DLL 请备份到 `plugins` 目录之外。
+- 退出游戏，下载 [v2.0.4 的 MiniRealisticAirways.dll](https://github.com/liamkrabs/MiniRealisticAirways2.0-Multilingual/releases/download/v2.0.4/MiniRealisticAirways.dll)，替换游戏目录中的 `BepInEx/plugins/MiniRealisticAirways.dll`。旧 DLL 请备份到 `plugins` 目录之外。
 - 本次 GitHub 发布不会自动更新 Steam 分支中的内置版本。
 - 如果想替换回旧版，可以下载[最初版本的 MiniRealisticAirways.dll](https://github.com/ericpzh/MiniRealisticAirways/releases/download/Public/MiniRealisticAirways.dll)，替换同一文件。
 

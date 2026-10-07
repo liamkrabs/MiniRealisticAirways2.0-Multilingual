@@ -18,10 +18,7 @@ internal class PatchEnableVisualWarning
 		if (other != null && __instance != null && !isAircraftWarner && AircraftState.GetAircraftStates(__instance, out var aircraftAltitude, out var _, out var _) && (aircraftAltitude.altitude_ != AltitudeLevel.High || aircraftAltitude.targetAltitude_ != AltitudeLevel.High) && __instance.state != Aircraft.State.Landing && aircraftAltitude.tcasAction_ == TCASAction.None && other.layer == AircraftSafetyLayer)
 		{
 			AltitudeLevel previousTarget = aircraftAltitude.targetAltitude_;
-			for (int i = (int)aircraftAltitude.targetAltitude_; i < (int)AltitudeLevel.High; i++)
-			{
-				aircraftAltitude.EmergencyClimb();
-			}
+			aircraftAltitude.EmergencySetTargetAltitude(AltitudeLevel.High);
 			if (previousTarget != aircraftAltitude.targetAltitude_) Plugin.Log.LogInfo("GPWS activated, emergency climbing.");
 		}
 	}

@@ -105,7 +105,7 @@ public sealed class AircraftVisualSortingController : MonoBehaviour
 			return;
 		}
 
-		sortingLayerId_ = primaryRenderer.sortingLayerID;
+		sortingLayerId_ = SortingLayer.NameToID(FlightVisualOrder.LayerName);
 		authoredInternalOrder_ = primaryRenderer.sortingOrder;
 		RegisterIconRenderers(aircraft.AP.GetComponentsInChildren<Renderer>(true));
 
@@ -114,11 +114,8 @@ public sealed class AircraftVisualSortingController : MonoBehaviour
 		{
 			sortingGroup_ = aircraft.gameObject.AddComponent<SortingGroup>();
 		}
-		authoredRootOrder_ = sortingGroup_.sortingOrder;
-		if (primaryRenderer.sortingOrder > authoredRootOrder_)
-		{
-			authoredRootOrder_ = primaryRenderer.sortingOrder;
-		}
+		authoredRootOrder_ = FlightVisualOrder.AircraftBase;
+		sortingGroup_.sortAtRoot = true;
 		sortingGroup_.sortingLayerID = sortingLayerId_;
 
 		if (pendingTexts_ != null)

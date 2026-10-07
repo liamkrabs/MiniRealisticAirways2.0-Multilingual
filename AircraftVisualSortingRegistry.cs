@@ -90,7 +90,7 @@ internal static class AircraftVisualSortingRegistry
 				nextOrder = LayerBaseOrders[layerId];
 			}
 			controller.ApplyRootOrder(nextOrder);
-			LayerNextOrders[layerId] = nextOrder == int.MaxValue ? int.MaxValue : nextOrder + 1;
+			LayerNextOrders[layerId] = nextOrder >= FlightVisualOrder.Maximum ? FlightVisualOrder.Maximum : nextOrder + 1;
 		}
 	}
 

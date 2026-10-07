@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using BepInEx.Configuration;
 using ArabicSupport;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,21 @@ public static class Settings
 	public static bool DISABLE_EVENTS;
 
 	public static bool DISABLE_TCAS;
+
+	private static ConfigEntry<bool> windEnabled_;
+	private static ConfigEntry<bool> eventsEnabled_;
+	private static ConfigEntry<bool> tcasEnabled_;
+
+	internal static void Initialize(ConfigFile config)
+	{
+		config.SaveOnConfigSet = true;
+		windEnabled_ = config.Bind("Gameplay", "EnableWind", true, "Enable wind. Saved when changed in Options.");
+		eventsEnabled_ = config.Bind("Gameplay", "EnableEvents", true, "Enable special events. Saved when changed in Options.");
+		tcasEnabled_ = config.Bind("Gameplay", "EnableTCAS", true, "Enable TCAS and GPWS. Saved when changed in Options.");
+		DISABLE_WIND = !windEnabled_.Value;
+		DISABLE_EVENTS = !eventsEnabled_.Value;
+		DISABLE_TCAS = !tcasEnabled_.Value;
+	}
 
 	public static Button windToggle;
 
@@ -166,6 +182,9 @@ public static class Settings
 		ReacquireClones();
 		SubscribeLocaleChanges();
 		RefreshLocalizedTexts();
+		OnToggle(ref windToggle, !DISABLE_WIND);
+		OnToggle(ref eventToggle, !DISABLE_EVENTS);
+		OnToggle(ref tcasToggle, !DISABLE_TCAS);
 		bool ready = IsSetupFor(subtitlesButton);
 		if (ready && setupLoggedRoot_ != setupRoot_)
 		{
@@ -427,22 +446,25 @@ public static class Settings
 
 	public static void OnWindButtonClick()
 	{
-		OnToggle(ref windToggle, DISABLE_WIND);
 		DISABLE_WIND = !DISABLE_WIND;
+		if (windEnabled_ != null) windEnabled_.Value = !DISABLE_WIND;
+		OnToggle(ref windToggle, !DISABLE_WIND);
 		Plugin.Log?.LogInfo("Disable wind: " + DISABLE_WIND);
 	}
 
 	public static void OnEventButtonClick()
 	{
-		OnToggle(ref eventToggle, DISABLE_EVENTS);
 		DISABLE_EVENTS = !DISABLE_EVENTS;
+		if (eventsEnabled_ != null) eventsEnabled_.Value = !DISABLE_EVENTS;
+		OnToggle(ref eventToggle, !DISABLE_EVENTS);
 		Plugin.Log?.LogInfo("Disable events: " + DISABLE_EVENTS);
 	}
 
 	public static void OnTCASButtonClick()
 	{
-		OnToggle(ref tcasToggle, DISABLE_TCAS);
 		DISABLE_TCAS = !DISABLE_TCAS;
+		if (tcasEnabled_ != null) tcasEnabled_.Value = !DISABLE_TCAS;
+		OnToggle(ref tcasToggle, !DISABLE_TCAS);
 		Plugin.Log?.LogInfo("Disable TCAS: " + DISABLE_TCAS);
 	}
 

@@ -49,10 +49,11 @@ public class Plugin : BaseUnityPlugin
 		// Subscribe once to the game's locale service before any cloned UI is
 		// created. The catalog is embedded in this DLL and has no MapPort
 		// dependency; subscribers update only their cached labels on a change.
+		Settings.Initialize(Config);
+		ProcessLaunchOptions();
 		ModLocalization.Initialize();
 		InstallSceneHook();
 		InstallHarmony();
-		ProcessLaunchOptions();
 		// BepInEx may be injected after the first sceneLoaded notification. Make a
 		// best-effort pass immediately; authoritative game Start/Update patches
 		// retry when their objects are actually ready.

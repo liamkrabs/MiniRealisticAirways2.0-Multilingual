@@ -18,8 +18,6 @@ public class AircraftState : MonoBehaviour
 
 	public Aircraft aircraft_;
 
-	public PlaceableWaypoint commandingWaypoint_;
-
 	public bool weatherAffected_ = false;
 
 	private TMP_Text altitudeText_;

@@ -27,6 +27,8 @@ public class AircraftAltitude : Altitude
 
 	private bool isEmergencyTransitioning_ = false;
 
+	private int transitionRevision_;
+
 	private Camera mainCamera_;
 
 	private bool flightStateInitialized_;
@@ -61,8 +63,7 @@ public class AircraftAltitude : Altitude
 
 	internal void CompleteTouchdown()
 	{
-		if (transitioningCoroutine_ != null) StopCoroutine(transitioningCoroutine_);
-		if (blinkCoroutine_ != null) StopCoroutine(blinkCoroutine_);
+		CancelAltitudeTransition();
 		if (enableAltitudeGaugeCoroutine_ != null) StopCoroutine(enableAltitudeGaugeCoroutine_);
 		transitioningCoroutine_ = null;
 		blinkCoroutine_ = null;
@@ -95,48 +96,83 @@ public class AircraftAltitude : Altitude
 		}
 	}
 
+	internal bool CanReceiveAltitudeCommand => aircraft_ != null && !altitudeDisabled_
+		&& altitude_ >= AltitudeLevel.Low && !aircraft_.OnTheGround
+		&& aircraft_.state != Aircraft.State.TakingOff;
+
 	public void AircraftClimb()
 	{
-		if (!altitudeDisabled_ && targetAltitude_ < AltitudeLevel.High)
-		{
-			targetAltitude_++;
-			AltitudeTransition();
-		}
+		// Repeated upward input cannot stack on a pending climb, including a
+		// two-level waypoint command. Reverse input is based on actual altitude.
+		if (targetAltitude_ > altitude_) return;
+		SetTargetAltitude(altitude_ < AltitudeLevel.High ? altitude_ + 1 : altitude_);
 	}
 
 	public void AircraftDescend()
 	{
-		if (!altitudeDisabled_ && targetAltitude_ > AltitudeLevel.Low)
-		{
-			targetAltitude_--;
-			AltitudeTransition();
-		}
+		if (targetAltitude_ < altitude_) return;
+		SetTargetAltitude(altitude_ > AltitudeLevel.Low ? altitude_ - 1 : altitude_);
+	}
+
+	internal bool SetTargetAltitude(AltitudeLevel target)
+	{
+		if (!CanReceiveAltitudeCommand || isEmergencyTransitioning_) return false;
+		return ReplaceAltitudeCommand(target, emergency: false);
 	}
 
 	public void EmergencyClimb(bool priority = false)
 	{
-		if (!Settings.DISABLE_TCAS && !altitudeDisabled_ && altitude_ != AltitudeLevel.Ground)
-		{
-			if (targetAltitude_ < AltitudeLevel.High)
-			{
-				tcasAction_ = TCASAction.Climb;
-				targetAltitude_++;
-				EmergencyAltitudeTransition(priority);
-			}
-		}
+		EmergencySetTargetAltitude(altitude_ < AltitudeLevel.High ? altitude_ + 1 : altitude_, priority);
 	}
 
 	public void EmergencyDescend()
 	{
-		if (!Settings.DISABLE_TCAS && !altitudeDisabled_ && altitude_ != AltitudeLevel.Ground)
+		EmergencySetTargetAltitude(altitude_ > AltitudeLevel.Low ? altitude_ - 1 : altitude_);
+	}
+
+	internal void EmergencySetTargetAltitude(AltitudeLevel target, bool priority = false)
+	{
+		if (Settings.DISABLE_TCAS || !CanReceiveAltitudeCommand || tcasAction_ == TCASAction.Disabled) return;
+		if (isEmergencyTransitioning_ && !priority) return;
+		ReplaceAltitudeCommand(target, emergency: true);
+	}
+
+	private bool ReplaceAltitudeCommand(AltitudeLevel target, bool emergency)
+	{
+		if (target < AltitudeLevel.Low || target > AltitudeLevel.High) return false;
+		if (target == targetAltitude_ && (transitioningCoroutine_ != null || target == altitude_))
 		{
-			if (targetAltitude_ > AltitudeLevel.Low)
-			{
-				tcasAction_ = TCASAction.Descend;
-				targetAltitude_--;
-				EmergencyAltitudeTransition();
-			}
+			// Safety may take ownership of an existing command without restarting
+			// its timer. Repeated identical commands never postpone completion.
+			if (emergency && target != altitude_) SetEmergencyAction(target);
+			return true;
 		}
+		CancelAltitudeTransition();
+		targetAltitude_ = target;
+		if (target != altitude_)
+		{
+			if (emergency) SetEmergencyAction(target);
+			AltitudeTransition();
+		}
+		return true;
+	}
+
+	private void SetEmergencyAction(AltitudeLevel target)
+	{
+		isEmergencyTransitioning_ = true;
+		tcasAction_ = target > altitude_ ? TCASAction.Climb : TCASAction.Descend;
+	}
+
+	private void CancelAltitudeTransition()
+	{
+		transitionRevision_++;
+		if (transitioningCoroutine_ != null) StopCoroutine(transitioningCoroutine_);
+		if (blinkCoroutine_ != null) StopCoroutine(blinkCoroutine_);
+		transitioningCoroutine_ = null;
+		blinkCoroutine_ = null;
+		isEmergencyTransitioning_ = false;
+		if (tcasAction_ != TCASAction.Disabled) tcasAction_ = TCASAction.None;
+		if (altitudeGauge_ != null && altitudeGauge_.Ready()) altitudeGauge_.UpdateGauge(altitude_);
 	}
 
 	public bool IsLanding()
@@ -202,28 +238,12 @@ public class AircraftAltitude : Altitude
 		}
 	}
 
-	private void EmergencyAltitudeTransition(bool priority = false)
-	{
-		if (priority || !isEmergencyTransitioning_)
-		{
-			isEmergencyTransitioning_ = true;
-			if (transitioningCoroutine_ != null)
-			{
-				StopCoroutine(transitioningCoroutine_);
-			}
-			if (blinkCoroutine_ != null)
-			{
-				StopCoroutine(blinkCoroutine_);
-			}
-			transitioningCoroutine_ = AltitudeTransitionCoroutine(targetAltitude_);
-			StartCoroutine(transitioningCoroutine_);
-		}
-	}
 
 	private void TakeoffTouchdownArrivalProcess()
 	{
 		if (altitude_ == AltitudeLevel.Ground && aircraft_.direction == Aircraft.Direction.Outbound && (aircraft_.state == Aircraft.State.Flying || aircraft_.state == Aircraft.State.HeadingAfterReachingWaypoint))
 		{
+			CancelAltitudeTransition();
 			altitude_ = AltitudeLevel.Low;
 			targetAltitude_ = AltitudeLevel.Low;
 			if (enableAltitudeGaugeCoroutine_ == null)
@@ -250,17 +270,24 @@ public class AircraftAltitude : Altitude
 
 	private IEnumerator AltitudeTransitionCoroutine(AltitudeLevel targetAltitude)
 	{
+		int revision = transitionRevision_;
 		// 仪表只是显示层；即使缺失或初始化失败，高度和避撞仍按时推进。
 		while (aircraft_ != null)
 		{
+			// Preserve gradual safety climbs/descents: one level per interval.
+			// An ordinary absolute waypoint clearance may cross two levels in one.
+			AltitudeLevel stepTarget = isEmergencyTransitioning_ && altitude_ != targetAltitude
+				? (altitude_ < targetAltitude ? altitude_ + 1 : altitude_ - 1)
+				: targetAltitude;
 			blinkCoroutine_ = altitudeGauge_ != null && altitudeGauge_.TryInitialize()
-				? altitudeGauge_.GetTransitioningCoroutine(altitude_, targetAltitude)
+				? altitudeGauge_.GetTransitioningCoroutine(altitude_, stepTarget)
 				: null;
 			if (blinkCoroutine_ != null)
 			{
 				StartCoroutine(blinkCoroutine_);
 			}
 			yield return new WaitForSeconds(TRANSITION_TIME);
+			if (revision != transitionRevision_) yield break;
 			if (aircraft_ == null)
 			{
 				transitioningCoroutine_ = null;
@@ -273,8 +300,8 @@ public class AircraftAltitude : Altitude
 				CompleteTouchdown();
 				yield break;
 			}
-			altitude_ = targetAltitude;
-			if (tcasAction_ != TCASAction.Disabled)
+			altitude_ = stepTarget;
+			if (altitude_ == targetAltitude_ && tcasAction_ != TCASAction.Disabled)
 			{
 				tcasAction_ = TCASAction.None;
 			}
